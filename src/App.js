@@ -1,19 +1,30 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { HashRouter, Switch, Route } from 'react-router-dom';
+import Home from './components/Home.js';
+import Rank from './components/Rank.js';
+import Search from './components/Search.js';
+import My from './components/My.js';
+import TabBar from './components/TabBar.js';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+      <HashRouter>
+        <div className="App">
+          <Switch>
+            <Route path="/" exact component={Home}/>
+            <Route path="/rank" component={Rank}/>
+            <Route path="/search" component={Search}/>
+            <Route path="/my" component={My}/>
+          </Switch>
+          <Switch>
+            <Route path="/" exact component={TabBar}/>
+            <Route path="/rank" component={TabBar}/>
+            <Route path="/search" component={TabBar}/>
+            <Route path="/my" component={TabBar}/>
+          </Switch>
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      </HashRouter>
     );
   }
 }

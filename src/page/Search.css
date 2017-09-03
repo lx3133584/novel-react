@@ -1,0 +1,6 @@
+.am-search {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    box-sizing: border-box;
+}

@@ -1,30 +1,47 @@
 import React, { Component } from 'react';
-import { HashRouter, Switch, Route } from 'react-router-dom';
-import Home from './components/Home.js';
-import Rank from './components/Rank.js';
-import Search from './components/Search.js';
-import My from './components/My.js';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { createStore, applyMiddleware } from 'redux'
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+import { createLogger } from 'redux-logger';
+import reducer from './reducers'
+import Home from './page/Home.js';
+import Rank from './page/Rank.js';
+import Search from './page/Search.js';
+import My from './page/My.js';
 import TabBar from './components/TabBar.js';
+
+const middleware = [ thunk ]
+if (process.env.NODE_ENV !== 'production') {
+  middleware.push(createLogger())
+}
+
+const store = createStore(
+  reducer,
+  applyMiddleware(...middleware)
+)
 
 class App extends Component {
   render() {
     return (
-      <HashRouter>
-        <div className="App">
-          <Switch>
-            <Route path="/" exact component={Home}/>
-            <Route path="/rank" component={Rank}/>
-            <Route path="/search" component={Search}/>
-            <Route path="/my" component={My}/>
-          </Switch>
-          <Switch>
-            <Route path="/" exact component={TabBar}/>
-            <Route path="/rank" component={TabBar}/>
-            <Route path="/search" component={TabBar}/>
-            <Route path="/my" component={TabBar}/>
-          </Switch>
-        </div>
-      </HashRouter>
+      <Provider store={store}>
+        <BrowserRouter>
+          <div className="App">
+            <Switch>
+              <Route path="/" exact component={Home}/>
+              <Route path="/rank" component={Rank}/>
+              <Route path="/search" component={Search}/>
+              <Route path="/my" component={My}/>
+            </Switch>
+            <Switch>
+              <Route path="/" exact component={TabBar}/>
+              <Route path="/rank" component={TabBar}/>
+              <Route path="/search" component={TabBar}/>
+              <Route path="/my" component={TabBar}/>
+            </Switch>
+          </div>
+        </BrowserRouter>
+      </Provider>
     );
   }
 }

@@ -6,6 +6,16 @@ export default class extends Component {
         this.props.getDetail(params.category, params.ids)
         console.log(this)
     }
+    goContent(id) {
+        let _this = this
+        return () => {
+            let params = _this.props.match.params
+            _this.props.history.push({
+                pathname: `/content/${params.category}/${params.ids}`,
+                search: `?id=${id}`
+            })
+        }
+    }
     render() {
         let detail = this.props.detail
         console.log(detail)
@@ -33,11 +43,11 @@ export default class extends Component {
                 </div>
                 <div style={{ color: '#999', background: '#fff', padding: '1em' }}>
                     <span style={{ color: '#333' }}>内容简介:</span>
-                    {detail.introduction}
+                    <span dangerouslySetInnerHTML={{__html: detail.introduction}}></span>
                 </div>
                 <WhiteSpace />
                 <List renderHeader={() => '最新章节'}>
-                    {detail.new_chaptar_list && detail.new_chaptar_list.map(item => <List.Item arrow="horizontal" onClick={() => { }}>{item.title}</List.Item>)}
+                    {detail.new_chaptar_list && detail.new_chaptar_list.map(item => <List.Item arrow="horizontal" key={item.id} onClick={this.goContent(item.id)}>{item.title}</List.Item>)}
                 </List>
             </div>
         );

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-class Book extends Component {
+export default class extends Component {
     render() {
         let obj = this.props.data
         return (
@@ -22,5 +22,3 @@ class Book extends Component {
         );
     }
 }
-
-export default Book;

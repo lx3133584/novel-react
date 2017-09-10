@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { TabBar } from 'antd-mobile';
-class Bar extends Component {
+export default class extends Component {
     constructor(props) {
         super(props);
         this.itemMap = [
@@ -13,10 +13,12 @@ class Bar extends Component {
 
     }
     read() {
-
+        let params = this.props.match.params
+        this.props.history.push(`/content/${params.category}/${params.ids}`)
     }
     list() {
-        
+        let params = this.props.match.params
+        this.props.history.push(`/list/${params.category}/${params.ids}`)
     }
     renderItem({title, icon, handler}) {
         let Icon = () => <i className={"iconfont icon-" + icon} style={{fontSize:'0.44rem'}} />
@@ -26,7 +28,7 @@ class Bar extends Component {
             key={icon}
             icon={<Icon />}
             selectedIcon={<Icon />}
-            onPress={this.handler}
+            onPress={handler}
         />
         )
     }
@@ -42,5 +44,3 @@ class Bar extends Component {
         );
     }
 }
-
-export default Bar;

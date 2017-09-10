@@ -1,23 +1,25 @@
 import { connect } from 'react-redux';
 import { fetchContent } from '../actions';
-import DetailTabBar from '../components/DetailTabBar';
+import Content from '../components/Content';
 import { withRouter } from 'react-router-dom';
 
 const mapStateToProps = (state, ownProps) => {
-    return {
-        result: state
-    }
+  return {
+    content: state.content.content || '',
+    title: state.content.title || '',
+    loading: state.content.isFetching || false
+  }
 }
 
 const mapDispatchToProps = dispatch => {
-    return {
-        getContent: (category, ids, id) => {
-            dispatch(fetchContent(category, ids, id))
-        }
+  return {
+    getContent: (category, ids, id) => {
+        dispatch(fetchContent(category, ids, id))
     }
+  }
 }
 
 export default withRouter(connect(
     mapStateToProps,
     mapDispatchToProps
-)(DetailTabBar))
+  )(Content))

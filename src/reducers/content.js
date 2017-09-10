@@ -1,23 +1,26 @@
-import { FETCH_DETAIL_REQUEST, FETCH_DETAIL_SUCCESS, FETCH_DETAIL_FAILURE } from '../actions'
+import { FETCH_CONTENT_REQUEST, FETCH_CONTENT_SUCCESS, FETCH_CONTENT_FAILURE } from '../actions'
 
 export default (state = {
     isFetching: false,
-    result: {},
+    content: '',
+    title: ''
 }, action) => {
     switch (action.type) {
-        case FETCH_DETAIL_REQUEST:
+        case FETCH_CONTENT_REQUEST:
             return {
                 ...state,
-                result: {},
+                content: '',
+                title: '',
                 isFetching: true
             }
-        case FETCH_DETAIL_SUCCESS:
+        case FETCH_CONTENT_SUCCESS:
             return {
                 ...state,
                 isFetching: false,
-                result: {...action.result},
+                content: action.result.content,
+                title: action.result.title,
             }
-        case FETCH_DETAIL_FAILURE:
+        case FETCH_CONTENT_FAILURE:
             return {
                 ...state,
                 isFetching: false,

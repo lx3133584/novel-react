@@ -1,23 +1,25 @@
-import { FETCH_DETAIL_REQUEST, FETCH_DETAIL_SUCCESS, FETCH_DETAIL_FAILURE } from '../actions'
+import { FETCH_LIST_REQUEST, FETCH_LIST_SUCCESS, FETCH_LIST_FAILURE } from '../actions'
 
 export default (state = {
     isFetching: false,
-    result: {},
+    title: '',    
+    list: [],
 }, action) => {
     switch (action.type) {
-        case FETCH_DETAIL_REQUEST:
+        case FETCH_LIST_REQUEST:
             return {
                 ...state,
-                result: {},
+                list: [],
                 isFetching: true
             }
-        case FETCH_DETAIL_SUCCESS:
+        case FETCH_LIST_SUCCESS:
             return {
                 ...state,
                 isFetching: false,
-                result: {...action.result},
+                title: action.result.title,
+                list: [...action.result.list],
             }
-        case FETCH_DETAIL_FAILURE:
+        case FETCH_LIST_FAILURE:
             return {
                 ...state,
                 isFetching: false,

@@ -10,6 +10,8 @@ import Rank from './page/Rank.js';
 import Search from './page/Search.js';
 import My from './page/My.js';
 import Detail from './page/Detail.js';
+import Content from './page/Content.js';
+import List from './page/List.js';
 import TabBar from './components/TabBar.js';
 
 const middleware = [ thunk ]
@@ -34,6 +36,8 @@ class App extends Component {
               <Route path="/search" component={Search}/>
               <Route path="/my" component={My}/>
               <Route path="/detail/:category/:ids" component={Detail}/>
+              <Route path="/content/:category/:ids" component={Content}/>
+              <Route path="/list/:category/:ids" component={List}/>
             </Switch>
             <Switch>
               <Route path="/" exact component={TabBar}/>

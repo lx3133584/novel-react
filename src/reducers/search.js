@@ -16,7 +16,7 @@ export default (state = {
             return {
                 ...state,
                 isFetching: false,
-                results: action.results,
+                results: [...state.results, ...action.results],
                 count: action.count
             }
         case FETCH_SEARCH_FAILURE:
@@ -28,7 +28,8 @@ export default (state = {
         case SAVE_SEARCH_KEYWORD:
             return {
                 ...state,
-                keyword: action.keyword
+                keyword: action.keyword,
+                results: state.keyword === action.keyword ? [...state.results] : []
             }
         default:
             return state

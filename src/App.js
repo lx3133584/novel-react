@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { createStore, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
@@ -9,6 +9,7 @@ import Home from './page/Home.js';
 import Rank from './page/Rank.js';
 import Search from './page/Search.js';
 import My from './page/My.js';
+import Detail from './page/Detail.js';
 import TabBar from './components/TabBar.js';
 
 const middleware = [ thunk ]
@@ -32,6 +33,7 @@ class App extends Component {
               <Route path="/rank" component={Rank}/>
               <Route path="/search" component={Search}/>
               <Route path="/my" component={My}/>
+              <Route path="/detail/:category/:ids" component={Detail}/>
             </Switch>
             <Switch>
               <Route path="/" exact component={TabBar}/>

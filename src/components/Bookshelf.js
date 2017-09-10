@@ -2,28 +2,24 @@ import React, { Component } from 'react';
 import { ListView } from 'antd-mobile';
 import Book from '../components/Book.js'
 
-let pageIndex = 0;
-const PAGE_SIZE = 5
-
 class Bookshelf extends Component {
     constructor(props) {
         super(props);
         const dataSource = new ListView.DataSource({
             rowHasChanged: (row1, row2) => row1 !== row2
         });
-        this.dataBlob = {};
-        this.sectionIDs = [];
-        this.rowIDs = [];
-
+        this.pageIndex = 0;
+        this.PAGE_SIZE = 10;
+        this.hasMore = true;
         this.state = {
             dataSource: dataSource.cloneWithRows(this.props.results),
         };
     }
     componentWillReceiveProps(nextProps) {
         if (nextProps.results !== this.props.results) {
-            console.log('update')
+            this.props.results.length || (this.pageIndex = 0);
             this.setState({
-                dataSource: this.state.dataSource.cloneWithRows(nextProps.results),
+                dataSource: this.state.dataSource.cloneWithRows([...nextProps.results]),
             });
         }
     }
@@ -32,11 +28,8 @@ class Bookshelf extends Component {
         if (this.props.isLoading || !this.hasMore) {
             return;
         }
-        console.log('reach end', event);
-        console.log('index', pageIndex)
-        console.log('judge', pageIndex === Math.ceil(this.props.count / PAGE_SIZE))
-        this.props.search(this.props.keyword, ++pageIndex)
-        if (pageIndex === Math.ceil(this.props.count / PAGE_SIZE)) this.hasMore = false
+        this.props.search(this.props.keyword, ++this.pageIndex)
+        if (this.pageIndex === Math.floor(this.props.count / this.PAGE_SIZE)) this.hasMore = false
     }
 
     render() {
@@ -44,7 +37,7 @@ class Bookshelf extends Component {
             <div key={`${sectionID}-${rowID}`}
                 style={{
                     backgroundColor: '#F5F5F9',
-                    height: 8,
+                    height: '0.1rem',
                     borderTop: '1px solid #ECECED',
                     borderBottom: '1px solid #ECECED',
                 }}
@@ -58,21 +51,34 @@ class Bookshelf extends Component {
                 />
             );
         };
+        const footer = () => {
+            let Text = null;
+            if (this.props.isLoading) {
+                Text = () => <span>加载中...</span>;
+            } else if (!this.hasMore) {
+                Text = () => <span>已经没有更多数据</span>;
+            } else if (!this.props.results.length) {
+                Text = () => <span>暂时没有数据</span>;
+            } else {
+                Text = () => <span>下拉加载更多</span>;
+            }
+            return (<div style={{ padding: '0.4rem', textAlign: 'center' }}>
+                <Text />
+            </div>)
+        }
 
         return (
-            <ListView ref="lv"
+            <ListView
                 dataSource={this.state.dataSource}
-                renderFooter={() => (<div style={{ padding: 30, textAlign: 'center' }}>
-                    {this.props.isLoading ? 'Loading...' : 'Loaded'}
-                </div>)}
+                renderFooter={footer}
                 renderRow={row}
                 renderSeparator={separator}
                 className="am-list"
-                pageSize={PAGE_SIZE}
+                pageSize={this.PAGE_SIZE}
                 useBodyScroll
+                onEndReached={this.onEndReached}
                 scrollRenderAheadDistance={500}
                 scrollEventThrottle={200}
-                onEndReached={this.onEndReached}
                 onEndReachedThreshold={10}
             />
         );

@@ -4,10 +4,10 @@ import Bookshelf from '../components/Bookshelf';
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    results: state.results || [],
-    count: state.count || 0,
-    isLoading: state.isFetching || false,
-    keyword: state.keyword || ''
+    results: state.search.results,
+    count: state.search.count,
+    isLoading: state.search.isFetching,
+    keyword: state.search.keyword
   }
 }
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { List } from 'antd-mobile';
+import { List, ActivityIndicator } from 'antd-mobile';
 export default class extends Component {
     componentDidMount() {
         let params = this.props.match.params
@@ -19,9 +19,12 @@ export default class extends Component {
     render() {
         let listData = this.props.list
         return (
-            <List renderHeader={() => this.props.title}>
-                {listData.map(item => <List.Item arrow="horizontal" key={item.id} onClick={this.goContent(item.id)}>{item.title}</List.Item>)}
-            </List>
+            <div>
+                {this.props.loading && <ActivityIndicator size="large" toast text="正在加载..." />}
+                <List renderHeader={() => this.props.title}>
+                    {listData.map(item => <List.Item arrow="horizontal" key={item.id} onClick={this.goContent(item.id)}>{item.title}</List.Item>)}
+                </List>
+            </div>
         );
     }
 }

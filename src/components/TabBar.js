@@ -7,7 +7,7 @@ class Bar extends Component {
             selectedTab: this.props.location.pathname
         };
         this.itemMap = [
-            {path: '/', title: '首页', icon: 'home'},
+            {path: '/', title: '书架', icon: 'bookshelf'},
             {path: '/rank', title: '排行', icon: 'rank'},
             {path: '/search', title: '搜索', icon: 'search'},
             {path: '/my', title: '我的', icon: 'my'},

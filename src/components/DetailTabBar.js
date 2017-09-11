@@ -4,7 +4,7 @@ export default class extends Component {
     constructor(props) {
         super(props);
         this.itemMap = [
-            {title: '加入书架', icon: '049bookshelf', handler: this.add.bind(this)},
+            {title: '加入书架', icon: 'addbookshelf', handler: this.add.bind(this)},
             {title: '快速阅读', icon: 'book', handler: this.read.bind(this)},
             {title: '查看目录', icon: 'list', handler: this.list.bind(this)},
         ]

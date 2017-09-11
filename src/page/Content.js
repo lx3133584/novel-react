@@ -3,7 +3,9 @@ import Content from '../containers/Content.js';
 export default class extends Component {
     render() {
         return (
-            <Content />
+            <div>
+                <Content />
+            </div>
         );
     }
 }

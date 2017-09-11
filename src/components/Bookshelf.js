@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ListView } from 'antd-mobile';
+import { ListView, ActivityIndicator } from 'antd-mobile';
 import Book from '../components/Book.js'
 
 class Bookshelf extends Component {
@@ -54,7 +54,9 @@ class Bookshelf extends Component {
         const footer = () => {
             let Text = null;
             if (this.props.isLoading) {
-                Text = () => <span>加载中...</span>;
+                Text = () => <ActivityIndicator
+                text="加载中"
+              />;
             } else if (!this.hasMore) {
                 Text = () => <span>已经没有更多数据</span>;
             } else if (!this.props.results.length) {
@@ -62,7 +64,7 @@ class Bookshelf extends Component {
             } else {
                 Text = () => <span>下拉加载更多</span>;
             }
-            return (<div style={{ padding: '0.4rem', textAlign: 'center' }}>
+            return (<div style={{ padding: '0.4rem', display: 'flex', justifyContent: 'center' }}>
                 <Text />
             </div>)
         }

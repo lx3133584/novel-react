@@ -1,18 +1,19 @@
 import { connect } from 'react-redux';
-import { fetchContent } from '../actions';
+import { addOneBook } from '../actions';
 import DetailTabBar from '../components/DetailTabBar';
 import { withRouter } from 'react-router-dom';
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        result: state
+        data: state.detail.result,
+        list: state.bookshelf.list,
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        getContent: (category, ids, id) => {
-            dispatch(fetchContent(category, ids, id))
+        add: (data) => {
+            dispatch(addOneBook(data))
         }
     }
 }

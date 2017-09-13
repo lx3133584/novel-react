@@ -1,25 +1,29 @@
 import { connect } from 'react-redux';
-import { fetchSearch } from '../actions';
+// import { fetchSearch } from '../actions';
 import Bookshelf from '../components/Bookshelf';
 
 const mapStateToProps = (state, ownProps) => {
-  return {
-    results: state.search.results,
-    count: state.search.count,
-    isLoading: state.search.isFetching,
-    keyword: state.search.keyword
-  }
+    let list = []
+    console.log(state)
+    let bookshelf = state.bookshelf
+    for (let uid of bookshelf.list) {
+        list.push(bookshelf.data[uid])
+    }
+    return {
+        data: list,
+        count: list.length,
+    }
 }
 
 const mapDispatchToProps = dispatch => {
-  return {
-    search: (keyword, pageNo) => {
-        dispatch(fetchSearch(keyword, pageNo))
+    return {
+        getData: (keyword, pageNo) => {
+            // 
+        }
     }
-  }
 }
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-  )(Bookshelf)
+)(Bookshelf)

@@ -8,9 +8,27 @@ export default class extends Component {
             {title: '快速阅读', icon: 'book', handler: this.read.bind(this)},
             {title: '查看目录', icon: 'list', handler: this.list.bind(this)},
         ]
+        let list = this.props.list
+        let data = this.props.data
+        this.state = {
+            isAdd: list.indexOf(data.category + data.ids) !== -1
+        }
+    }
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.data !== this.props.data) {
+            let list = nextProps.list
+            let data = nextProps.data
+            this.setState({
+                isAdd: list.indexOf(data.category + data.ids) !== -1
+            });
+        }
     }
     add() {
-
+        let data = this.props.data
+        this.props.add({
+            ...data,
+            uid: data.category + data.ids,
+        })
     }
     read() {
         let params = this.props.match.params

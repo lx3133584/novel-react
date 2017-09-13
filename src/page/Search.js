@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Bookshelf from '../containers/Bookshelf.js';
+import SearchBookshelf from '../containers/SearchBookshelf.js';
 import SearchBar from '../containers/SearchBar.js';
 import './Search.css';
 class Search extends Component {
@@ -9,7 +9,7 @@ class Search extends Component {
           <SearchBar
             placeholder="搜索" 
             autoFocus={true} />
-          <Bookshelf />
+          <SearchBookshelf />
         </div>
       );
     }

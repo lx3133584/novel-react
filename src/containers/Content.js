@@ -5,9 +5,9 @@ import { withRouter } from 'react-router-dom';
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    content: state.content.content || '',
-    title: state.content.title || '',
-    loading: state.content.isFetching || false
+    content: state.content.content,
+    title: state.content.title,
+    loading: state.content.isFetching
   }
 }
 

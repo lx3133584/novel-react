@@ -12,14 +12,14 @@ class Bookshelf extends Component {
         this.PAGE_SIZE = 10;
         this.hasMore = true;
         this.state = {
-            dataSource: dataSource.cloneWithRows(this.props.results),
+            dataSource: dataSource.cloneWithRows(this.props.data),
         };
     }
     componentWillReceiveProps(nextProps) {
-        if (nextProps.results !== this.props.results) {
-            this.props.results.length || (this.pageIndex = 0);
+        if (nextProps.data !== this.props.data) {
+            this.props.data.length || (this.pageIndex = 0);
             this.setState({
-                dataSource: this.state.dataSource.cloneWithRows([...nextProps.results]),
+                dataSource: this.state.dataSource.cloneWithRows([...nextProps.data]),
             });
         }
     }
@@ -28,7 +28,7 @@ class Bookshelf extends Component {
         if (this.props.isLoading || !this.hasMore) {
             return;
         }
-        this.props.search(this.props.keyword, ++this.pageIndex)
+        this.props.getData(++this.pageIndex, this.props.keyword)
         if (this.pageIndex === Math.floor(this.props.count / this.PAGE_SIZE)) this.hasMore = false
     }
 
@@ -59,7 +59,7 @@ class Bookshelf extends Component {
               />;
             } else if (!this.hasMore) {
                 Text = () => <span>已经没有更多数据</span>;
-            } else if (!this.props.results.length) {
+            } else if (!this.props.data.length) {
                 Text = () => <span>暂时没有数据</span>;
             } else {
                 Text = () => <span>下拉加载更多</span>;

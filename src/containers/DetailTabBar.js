@@ -4,9 +4,10 @@ import DetailTabBar from '../components/DetailTabBar';
 import { withRouter } from 'react-router-dom';
 
 const mapStateToProps = (state, ownProps) => {
+    let data = state.detail.result
     return {
-        data: state.detail.result,
-        list: state.bookshelf.list,
+        data,
+        isAdd: state.bookshelf.list.indexOf(data.category + data.ids) !== -1
     }
 }
 

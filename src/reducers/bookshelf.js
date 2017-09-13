@@ -10,7 +10,7 @@ export default (state = {
     let index = list.indexOf(uid)
     switch (action.type) {
         case ADD_ONE_BOOK:
-            list.push(uid)
+            list.indexOf(uid) === -1 && list.push(uid)
             localStorage.setItem(`BOOK${uid}`, JSON.stringify(book))
             localStorage.setItem(`BOOKSHELF`, JSON.stringify(list))
             return {

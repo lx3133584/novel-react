@@ -4,7 +4,6 @@ import Bookshelf from '../components/Bookshelf';
 
 const mapStateToProps = (state, ownProps) => {
     let list = []
-    console.log(state)
     let bookshelf = state.bookshelf
     for (let uid of bookshelf.list) {
         list.push(bookshelf.data[uid])

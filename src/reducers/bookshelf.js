@@ -36,14 +36,12 @@ export default (state = {
                 list,
             }
         case UPDATE_ONE_BOOK:
+            localStorage.setItem(`BOOK${uid}`, JSON.stringify(book))
             return {
                 ...state,
                 data: {
                     ...state.data,
-                    data: {
-                        ...state.data,
-                        [uid]: book,
-                    },
+                    [uid]: book,
                 },
             }
         case INIT_BOOKSHELF:
@@ -56,9 +54,9 @@ export default (state = {
                 ...state,
                 data: {
                     ...state.data,
-                    data,
-                    list,
+                    ...data,
                 },
+                list,
             }
         default:
             return state

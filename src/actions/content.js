@@ -4,8 +4,9 @@ export const FETCH_CONTENT_REQUEST = 'FETCH_CONTENT_REQUEST';
 export const FETCH_CONTENT_SUCCESS = 'FETCH_CONTENT_SUCCESS';
 export const FETCH_CONTENT_FAILURE = 'FETCH_CONTENT_FAILURE';
 
-const fetchContentRequest = () => ({
-    type: FETCH_CONTENT_REQUEST
+const fetchContentRequest = (params) => ({
+    type: FETCH_CONTENT_REQUEST,
+    params
 })
 const fetchContentSuccess = (result) => ({
     type: FETCH_CONTENT_SUCCESS,
@@ -16,7 +17,7 @@ const fetchContentFailure = error => ({
     error
 })
 export const fetchContent = (category, ids, id) => dispatch => {
-    dispatch(fetchContentRequest())
+    dispatch(fetchContentRequest({category, ids, id}))
     return content(category, ids, id).then(res => {
         dispatch(fetchContentSuccess(res.data))
     }).catch(error => {

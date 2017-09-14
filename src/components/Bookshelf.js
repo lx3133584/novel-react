@@ -47,7 +47,23 @@ class Bookshelf extends Component {
             return (
                 <Book
                     key={rowID}
-                    data={rowData}
+                    to={{
+                        pathname: `/detail/${rowData.category}/${rowData.ids}`,
+                        search: `?pic=${rowData.pic}`
+                    }}
+                    pic={rowData.pic}
+                    title={rowData.title}
+                    author={rowData.author}
+                    detailList={[
+                        {
+                            key: '简介',
+                            value: rowData.desc
+                        },
+                        {
+                            key: '最新章节',
+                            value: rowData.new_chapter
+                        },
+                    ]}
                 />
             );
         };

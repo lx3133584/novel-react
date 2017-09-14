@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import Bookshelf from '../containers/Bookshelf.js';
+import ReaderBookshelf from '../containers/ReaderBookshelf.js';
 class Home extends Component {
     render() {
       return (
-          <Bookshelf/>
+          <ReaderBookshelf/>
       );
     }
   }

@@ -4,7 +4,8 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
-import reducer from './reducers'
+import reducer from './reducers';
+import {initBookshelf} from './actions';
 import Home from './page/Home.js';
 import Rank from './page/Rank.js';
 import Search from './page/Search.js';
@@ -25,6 +26,9 @@ const store = createStore(
 )
 
 class App extends Component {
+  componentDidMount() {
+    store.dispatch(initBookshelf())
+  }
   render() {
     return (
       <Provider store={store}>

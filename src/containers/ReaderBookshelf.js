@@ -1,16 +1,15 @@
 import { connect } from 'react-redux';
 // import { fetchSearch } from '../actions';
-import Bookshelf from '../components/Bookshelf';
+import ReaderBookshelf from '../components/ReaderBookshelf';
 
 const mapStateToProps = (state, ownProps) => {
-    let list = []
+    let map = []
     let bookshelf = state.bookshelf
     for (let uid of bookshelf.list) {
-        list.push(bookshelf.data[uid])
+        map.push(bookshelf.data[uid])
     }
     return {
-        data: list,
-        count: list.length,
+        map,
     }
 }
 
@@ -25,4 +24,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Bookshelf)
+)(ReaderBookshelf)

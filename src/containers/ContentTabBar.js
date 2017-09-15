@@ -1,20 +1,17 @@
 import { connect } from 'react-redux';
-import { fetchList } from '../actions';
-import List from '../components/List';
+import ContentTabBar from '../components/ContentTabBar';
 import { withRouter } from 'react-router-dom';
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    list: state.list.list,
-    title: state.list.title,
-    loading: state.list.isFetching
+    title: state.content.title,
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     getList: (category, ids, id) => {
-        dispatch(fetchList(category, ids, id))
+        //
     }
   }
 }
@@ -22,4 +19,4 @@ const mapDispatchToProps = dispatch => {
 export default withRouter(connect(
     mapStateToProps,
     mapDispatchToProps
-  )(List))
+  )(ContentTabBar))

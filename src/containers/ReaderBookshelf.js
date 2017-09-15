@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-// import { fetchSearch } from '../actions';
+import { removeOneBook } from '../actions';
 import ReaderBookshelf from '../components/ReaderBookshelf';
 
 const mapStateToProps = (state, ownProps) => {
@@ -15,8 +15,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getData: (keyword, pageNo) => {
-            // 
+        removeBook: (id) => {
+            dispatch(removeOneBook(id))
         }
     }
 }

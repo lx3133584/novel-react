@@ -24,7 +24,7 @@ export default class Content extends Component {
                 {this.props.loading && <ActivityIndicator size="large" toast text="正在加载..." />}
                 <h2 style={{ margin: '0', padding: '0.5em 0', textAlign: 'center' }}>{this.props.title}</h2>
                 <WingBlank>
-                    <p dangerouslySetInnerHTML={{ __html: this.props.content }}></p>
+                    <p onClick={this.props.switchShowHeader} style={{minHeight: '80vh'}} dangerouslySetInnerHTML={{ __html: this.props.content }}></p>
                     <Pagination total={this.props.total}
                         className="custom-pagination-with-icon"
                         current={this.props.cur - 1}

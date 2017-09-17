@@ -17,6 +17,9 @@ const mapStateToProps = (state, ownProps) => {
     first_id,
     loading: content.isFetching,
     book,
+    fontSize: state.config.fontSize,
+    lineHeight: state.config.lineHeight,
+    background: state.config.background,
   }
 }
 

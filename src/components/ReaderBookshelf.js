@@ -1,6 +1,6 @@
 import React from 'react';
 import Book from './Book.js';
-import { SwipeAction } from 'antd-mobile';
+import { SwipeAction, WhiteSpace } from 'antd-mobile';
 export default function ReaderBookshelf({ map, removeBook }) {
     return (
         <div>
@@ -47,6 +47,7 @@ export default function ReaderBookshelf({ map, removeBook }) {
                         },
                     ]} />
             </SwipeAction>)}
+           {!map.length && <div style={{textAlign: 'center'}}><WhiteSpace size='xl'/>你的书架空空如也</div>}
         </div>
     );
 }

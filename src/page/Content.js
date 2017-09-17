@@ -1,24 +1,25 @@
 import React, { Component } from 'react';
 import Content from '../containers/Content.js';
 import ContentTabBar from '../containers/ContentTabBar.js';
+
 export default class ContentPage extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            isShowHeader: false
+            isShow: false
         }
-        this.switchShowHeader = this.switchShowHeader.bind(this)
+        this.showPopup = this.showPopup.bind(this)
     }
-    switchShowHeader() {
+    showPopup() {
         this.setState({
-            isShowHeader: !this.state.isShowHeader
+            isShow: !this.state.isShow
         })
     }
     render() {
         return (
             <div>
-                {this.state.isShowHeader && <ContentTabBar switchShowHeader={this.switchShowHeader}/>}
-                <Content switchShowHeader={this.switchShowHeader}/>
+                {this.state.isShow && <ContentTabBar showPopup={this.showPopup}/>}
+                <Content showPopup={this.showPopup}/>
             </div>
         );
     }

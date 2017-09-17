@@ -42,8 +42,8 @@ export default class extends Component {
                     </div>
                 </div>
                 <div style={{ color: '#999', background: '#fff', padding: '1em' }}>
-                    <span style={{ color: '#333' }}>内容简介:</span>
-                    <span dangerouslySetInnerHTML={{__html: detail.introduction}}></span>
+                    <span style={{ fontSize: '0.3rem', color: '#333' }}>内容简介:</span>
+                    <span style={{ fontSize: '0.3rem'}} dangerouslySetInnerHTML={{__html: detail.introduction}}></span>
                 </div>
                 <WhiteSpace />
                 <List renderHeader={() => '最新章节'}>

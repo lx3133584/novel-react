@@ -11,7 +11,7 @@ export default (state = {
     switch (action.type) {
         case ADD_ONE_BOOK:
             list.indexOf(uid) === -1 && list.push(uid)
-            localStorage.setItem(`BOOK${uid}`, JSON.stringify(book))
+            localStorage.setItem(`BOOK_${uid}`, JSON.stringify(book))
             localStorage.setItem(`BOOKSHELF`, JSON.stringify(list))
             return {
                 ...state,
@@ -24,7 +24,7 @@ export default (state = {
         case REMOVE_ONE_BOOK:
             if (index !== -1) {
                 list.splice(index, 1)
-                localStorage.removeItem(`BOOK${uid}`)
+                localStorage.removeItem(`BOOK_${uid}`)
                 localStorage.setItem(`BOOKSHELF`, JSON.stringify(list))
             }
             return {
@@ -36,7 +36,7 @@ export default (state = {
                 list,
             }
         case UPDATE_ONE_BOOK:
-            localStorage.setItem(`BOOK${uid}`, JSON.stringify(book))
+            localStorage.setItem(`BOOK_${uid}`, JSON.stringify(book))
             return {
                 ...state,
                 data: {
@@ -48,7 +48,7 @@ export default (state = {
             let data = {}
             list = JSON.parse(localStorage.getItem(`BOOKSHELF`) || '[]')
             for (let item of list) {
-                data[item] = JSON.parse(localStorage.getItem(`BOOK${item}`) || '{}')
+                data[item] = JSON.parse(localStorage.getItem(`BOOK_${item}`) || '{}')
             }
             return {
                 ...state,

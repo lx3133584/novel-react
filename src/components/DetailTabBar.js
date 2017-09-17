@@ -26,8 +26,8 @@ export default class DetailTabBar extends Component {
     componentWillReceiveProps(nextProps) {
         if (nextProps.isAdd !== this.props.isAdd) {
             let itemMap = [...this.state.itemMap]
-            itemMap[0].isAdd = nextProps
-            itemMap[0].title = nextProps ? '已加入书架' : '加入书架'
+            itemMap[0].isAdd = nextProps.isAdd
+            itemMap[0].title = nextProps.isAdd ? '已加入书架' : '加入书架'
             this.setState({
                 itemMap
             })

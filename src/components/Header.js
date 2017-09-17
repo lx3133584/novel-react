@@ -8,7 +8,7 @@ export default function Header({onLeftClick, more, title}) {
             iconName={null}
             onLeftClick={onLeftClick}
             leftContent={
-                <i className="iconfont icon-back" style={{ fontSize: '0.45rem' }}></i>
+                onLeftClick && <i className="iconfont icon-back" style={{ fontSize: '0.45rem' }}></i>
             }
             rightContent={
                 more && <i className="iconfont icon-ellipsis" style={{ fontSize: '0.4rem' }}></i>

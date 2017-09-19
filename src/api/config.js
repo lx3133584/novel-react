@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { Toast } from 'antd-mobile';
-axios.defaults.baseURL = `http://${window.location.hostname}:3001/api/`;
+axios.defaults.baseURL = `http://api.0lx.top/`;
 function interceptorsRequestSuccess (config) {
     return config
 }

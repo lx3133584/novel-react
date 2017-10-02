@@ -48,16 +48,15 @@ class Bookshelf extends Component {
                 <Book
                     key={rowID}
                     to={{
-                        pathname: `/detail/${rowData.category}/${rowData.ids}`,
-                        search: `?pic=${rowData.pic}`
+                        pathname: `/detail/${rowData.title}/${rowData.url}`
                     }}
-                    pic={rowData.pic}
+                    pic={rowData.img}
                     title={rowData.title}
                     author={rowData.author}
                     detailList={[
                         {
                             key: '简介',
-                            value: rowData.desc
+                            value: rowData.introduction
                         },
                         {
                             key: '最新章节',

@@ -6,8 +6,7 @@ import { withRouter } from 'react-router-dom';
 const mapStateToProps = (state, ownProps) => {
     let data = state.detail.result
     return {
-        data,
-        isAdd: state.bookshelf.list.indexOf(data.category + data.ids) !== -1
+        data
     }
 }
 

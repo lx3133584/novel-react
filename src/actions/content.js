@@ -16,12 +16,12 @@ const fetchContentFailure = error => ({
     type: FETCH_CONTENT_FAILURE,
     error
 })
-export const fetchContent = (category, ids, id) => dispatch => {
-    dispatch(fetchContentRequest({category, ids, id}))
-    return content(category, ids, id).then(res => {
+export const fetchContent = (id, num) => dispatch => {
+    dispatch(fetchContentRequest({id, num}))
+    return content(id, num).then(res => {
         dispatch(fetchContentSuccess(res.data))
     }).catch(error => {
-        dispatch(fetchContentFailure())
+        dispatch(fetchContentFailure(error))
     })
 }
 

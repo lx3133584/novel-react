@@ -40,9 +40,9 @@ class App extends Component {
               <Route path="/rank" component={Rank}/>
               <Route path="/search" component={Search}/>
               <Route path="/my" component={My}/>
-              <Route path="/detail/:category/:ids" component={Detail}/>
-              <Route path="/content/:category/:ids" component={Content}/>
-              <Route path="/list/:category/:ids" component={List}/>
+              <Route path="/detail/:id/:name?/:url?" component={Detail}/>
+              <Route path="/content/:id/:num" component={Content}/>
+              <Route path="/list/:id" component={List}/>
             </Switch>
             <Switch>
               <Route path="/" exact component={TabBar}/>

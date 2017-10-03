@@ -15,12 +15,12 @@ const fetchDetailFailure = error => ({
     type: FETCH_DETAIL_FAILURE,
     error
 })
-export const fetchDetail = (category, ids) => dispatch => {
+export const fetchDetail = (id, name, url) => dispatch => {
     dispatch(fetchDetailRequest())
-    return detail(category, ids).then(res => {
+    return detail(id, name, url).then(res => {
         dispatch(fetchDetailSuccess(res.data))
     }).catch(error => {
-        dispatch(fetchDetailFailure())
+        dispatch(fetchDetailFailure(error))
     })
 }
 

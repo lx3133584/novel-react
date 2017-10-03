@@ -14,7 +14,7 @@ function interceptorsResponseSuccess (response) {
 }
 
 function interceptorsResponseError (error) {
-    Toast.info(error.response && error.response.data && error.response.data.message, 1);
+    Toast.info(error.response && error.response.data && error.response.data.error, 1);
     return Promise.reject(error.response && error.response.data)
 }
 

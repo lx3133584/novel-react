@@ -25,11 +25,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    getContent: (category, ids, id) => {
-        dispatch(fetchContent(category, ids, id))
-    },
-    updateReadProgress: (book) => {
-      dispatch(updateOneBook(book))
+    getContent: (id, num) => {
+        dispatch(fetchContent(id, num))
     }
   }
 }

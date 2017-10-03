@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import { WingBlank, ActivityIndicator, Pagination } from 'antd-mobile';
 export default class Content extends Component {
     componentDidMount() {
-        let params = this.props.match.params
-        this.props.getContent(params.category, params.ids, this.props.location.search.replace('?id=', ''))
-        this.updateReadProgress(this.props.book)
+        let {id, num} = this.props.match.params
+        this.props.getContent(id, num)
     }
     componentWillReceiveProps(nextProps) {
         if (nextProps.cur !== this.props.cur) {

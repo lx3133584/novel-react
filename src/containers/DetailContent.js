@@ -5,14 +5,15 @@ import { withRouter } from 'react-router-dom';
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    detail: state.detail.result || {}
+    detail: state.detail.result,
+    loading: state.detail.isFetching
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    getDetail: (category, ids) => {
-        dispatch(fetchDetail(category, ids))
+    getDetail: (id, name, url) => {
+        dispatch(fetchDetail(id, name, url))
     }
   }
 }

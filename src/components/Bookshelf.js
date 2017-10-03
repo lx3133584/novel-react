@@ -44,11 +44,12 @@ class Bookshelf extends Component {
             />
         );
         const row = (rowData, sectionID, rowID) => {
+            let url = encodeURIComponent(rowData.url)
             return (
                 <Book
                     key={rowID}
                     to={{
-                        pathname: `/detail/${rowData.title}/${rowData.url}`
+                        pathname: `/detail/0/${rowData.title}/${url}`
                     }}
                     pic={rowData.img}
                     title={rowData.title}
@@ -57,11 +58,7 @@ class Bookshelf extends Component {
                         {
                             key: '简介',
                             value: rowData.introduction
-                        },
-                        {
-                            key: '最新章节',
-                            value: rowData.new_chapter
-                        },
+                        }
                     ]}
                 />
             );

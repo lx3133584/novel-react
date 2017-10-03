@@ -26,7 +26,7 @@ export const fetchSearch = (keyword, pageNo) => dispatch => {
     return search(keyword, pageNo).then(res => {
         dispatch(fetchSearchSuccess(res.data, res.count))
     }).catch(error => {
-        dispatch(fetchSearchFailure())
+        dispatch(fetchSearchFailure(error))
     })
 }
 

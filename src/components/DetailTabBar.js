@@ -44,12 +44,12 @@ export default class DetailTabBar extends Component {
         Toast.success('加入书架成功', 1);
     }
     read() {
-        let params = this.props.match.params
-        this.props.history.push(`/content/${params.category}/${params.ids}`)
+        let {_id} = this.props.data
+        this.props.history.push(`/content/${_id}/0`)
     }
     list() {
-        let params = this.props.match.params
-        this.props.history.push(`/list/${params.category}/${params.ids}`)
+        let {_id} = this.props.data
+        this.props.history.push(`/list/${_id}`)
     }
     renderItem({
         title,

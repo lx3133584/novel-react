@@ -61,12 +61,12 @@ export default class ContentTabBar extends Component {
         // Toast.success('加入书架成功', 1);
     }
     list() {
-        let params = this.props.match.params
-        this.props.history.push(`/list/${params.category}/${params.ids}`)
+        let {id} = this.props.match.params
+        this.props.history.push(`/list/${id}`)
     }
     detail() {
-        let params = this.props.match.params
-        this.props.history.push(`/detail/${params.category}/${params.ids}`)
+        let {id} = this.props.match.params
+        this.props.history.push(`/detail/${id}`)
     }
     render() {
         return (

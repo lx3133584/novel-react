@@ -5,6 +5,7 @@ import { SearchBar } from 'antd-mobile';
 const mapDispatchToProps = dispatch => {
   return {
     onSubmit: (keyword) => {
+        if(!keyword) return
         dispatch(saveSearchKeyword(keyword))
         dispatch(fetchSearch(keyword, 0))
     }

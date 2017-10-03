@@ -15,12 +15,12 @@ const fetchListFailure = error => ({
     type: FETCH_LIST_FAILURE,
     error
 })
-export const fetchList = (category, ids) => dispatch => {
+export const fetchList = (id) => dispatch => {
     dispatch(fetchListRequest())
-    return list(category, ids).then(res => {
+    return list(id).then(res => {
         dispatch(fetchListSuccess(res.data))
     }).catch(error => {
-        dispatch(fetchListFailure())
+        dispatch(fetchListFailure(error))
     })
 }
 

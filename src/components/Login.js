@@ -22,7 +22,6 @@ class Login extends Component {
     const {account, password} = this.state
     if(!account && !password) return
     this.props.onLogin(account, password).then(res => {
-      console.log(res)
       if (!res.status) return
       Toast.info('登陆成功', 1)
       localStorage.setItem('TOKEN', 'Bearer ' + res.token)

@@ -1,63 +1,65 @@
-import { ADD_ONE_BOOK, REMOVE_ONE_BOOK, UPDATE_ONE_BOOK, INIT_BOOKSHELF } from '../actions'
+import { FETCH_GET_BOOKSHELF_REQUEST, FETCH_GET_BOOKSHELF_SUCCESS, FETCH_GET_BOOKSHELF_FAILURE, FETCH_ADD_BOOK_REQUEST, FETCH_ADD_BOOK_SUCCESS, FETCH_ADD_BOOK_FAILURE, FETCH_REMOVE_BOOK_REQUEST, FETCH_REMOVE_BOOK_SUCCESS, FETCH_REMOVE_BOOK_FAILURE } from '../actions'
 
 export default (state = {
-    data: {},
+    isFetching: false,
     list: []
 }, action) => {
-    let book = action.data || {}
-    let uid = book.uid || action.id || 0
-    let list = [...state.list]
-    let index = list.indexOf(uid)
     switch (action.type) {
-        case ADD_ONE_BOOK:
-            list.indexOf(uid) === -1 && list.push(uid)
-            localStorage.setItem(`BOOK_${uid}`, JSON.stringify(book))
-            localStorage.setItem(`BOOKSHELF`, JSON.stringify(list))
+        case FETCH_GET_BOOKSHELF_REQUEST:
             return {
                 ...state,
-                data: {
-                    ...state.data,
-                    [uid]: book,
-                },
-                list,
+                isFetching: true,
             }
-        case REMOVE_ONE_BOOK:
-            if (index !== -1) {
-                list.splice(index, 1)
-                localStorage.removeItem(`BOOK_${uid}`)
-                localStorage.setItem(`BOOKSHELF`, JSON.stringify(list))
-            }
+        
+        case FETCH_GET_BOOKSHELF_SUCCESS:
             return {
                 ...state,
-                data: {
-                    ...state.data,
-                    [uid]: undefined,
-                },
-                list,
+                isFetching: false,
+                list: action.data
             }
-        case UPDATE_ONE_BOOK:
-            localStorage.setItem(`BOOK_${uid}`, JSON.stringify(book))
+        
+        case FETCH_GET_BOOKSHELF_FAILURE:
             return {
                 ...state,
-                data: {
-                    ...state.data,
-                    [uid]: book,
-                },
+                isFetching: false,
             }
-        case INIT_BOOKSHELF:
-            let data = {}
-            list = JSON.parse(localStorage.getItem(`BOOKSHELF`) || '[]')
-            for (let item of list) {
-                data[item] = JSON.parse(localStorage.getItem(`BOOK_${item}`) || '{}')
-            }
+        
+        case FETCH_ADD_BOOK_REQUEST:
             return {
                 ...state,
-                data: {
-                    ...state.data,
-                    ...data,
-                },
-                list,
+                isFetching: true,
             }
+        
+        case FETCH_ADD_BOOK_SUCCESS:
+            return {
+                ...state,
+                isFetching: false,
+            }
+        
+        case FETCH_ADD_BOOK_FAILURE:
+            return {
+                ...state,
+                isFetching: false,
+            }
+        
+        case FETCH_REMOVE_BOOK_REQUEST:
+            return {
+                ...state,
+                isFetching: true,
+            }
+        
+        case FETCH_REMOVE_BOOK_SUCCESS:
+            return {
+                ...state,
+                isFetching: false,
+            }
+        
+        case FETCH_REMOVE_BOOK_FAILURE:
+            return {
+                ...state,
+                isFetching: false,
+            }
+        
         default:
             return state
     }

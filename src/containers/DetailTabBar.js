@@ -1,16 +1,17 @@
 import { connect } from 'react-redux';
-import { addOneBook } from '../actions';
+import { fetchAddBook } from '../actions';
 import DetailTabBar from '../components/DetailTabBar';
 import { withRouter } from 'react-router-dom';
 
 const mapStateToProps = (state, ownProps) => ({
-    data: state.detail.result
+    id: state.detail.result._id,
+    isAdd: state.detail.result.join,
 })
 
 
 const mapDispatchToProps = dispatch => ({
-    add: (data) => {
-        dispatch(addOneBook(data))
+    add: (id) => {
+        dispatch(fetchAddBook(id))
     }
 })
 

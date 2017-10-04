@@ -17,3 +17,13 @@ export function register (user) {
 export function login (account, password) {
     return http.post(`user/login`, {account, password})
 }
+export function getBookshelf () {
+    return http.get(`bookshelf`)
+}
+export function addBook (id) {
+    return http.post(`bookshelf/order`, {id})
+}
+export function removeBook (id) {
+    return http.post(`bookshelf/delete`, {id})
+}
+

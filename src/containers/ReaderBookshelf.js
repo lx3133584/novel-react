@@ -1,21 +1,19 @@
 import { connect } from 'react-redux';
-import { removeOneBook } from '../actions';
+import { fetchRemoveBook, fetchGetBookshelf } from '../actions';
 import ReaderBookshelf from '../components/ReaderBookshelf';
 
 const mapStateToProps = (state, ownProps) => {
-    let map = []
-    let bookshelf = state.bookshelf
-    for (let uid of bookshelf.list) {
-        map.push(bookshelf.data[uid])
-    }
     return {
-        map,
+        list: state.bookshelf.list,
     }
 }
 
 const mapDispatchToProps = dispatch => ({
-    removeBook: (id) => {
-        dispatch(removeOneBook(id))
+    getBookshelf() {
+        return dispatch(fetchGetBookshelf())
+    },
+    removeBook(id) {
+        return dispatch(fetchRemoveBook(id))
     }
 })
 

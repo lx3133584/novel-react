@@ -35,7 +35,6 @@ class Register extends Component {
     || !this.state.name
   ) return
     this.props.onRegister(this.state).then(res => {
-      console.log(res)
       if (!res.status) return
       Toast.info('注册成功', 1)
       localStorage.setItem('TOKEN', 'Bearer ' + res.token)

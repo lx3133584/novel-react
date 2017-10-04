@@ -35,21 +35,14 @@ export default class DetailTabBar extends Component {
     }
     add() {
         if (this.props.isAdd) return
-        let data = this.props.data
-        this.props.add({
-            ...data,
-            uid: data.category + data.ids,
-            pic: this.props.location.search.replace('?pic=', '')
-        })
+        this.props.add(this.props.id)
         Toast.success('加入书架成功', 1);
     }
     read() {
-        let {_id} = this.props.data
-        this.props.history.push(`/content/${_id}/0`)
+        this.props.history.push(`/content/${this.props.id}/0`)
     }
     list() {
-        let {_id} = this.props.data
-        this.props.history.push(`/list/${_id}`)
+        this.props.history.push(`/list/${this.props.id}`)
     }
     renderItem({
         title,

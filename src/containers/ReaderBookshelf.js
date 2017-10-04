@@ -13,13 +13,11 @@ const mapStateToProps = (state, ownProps) => {
     }
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        removeBook: (id) => {
-            dispatch(removeOneBook(id))
-        }
+const mapDispatchToProps = dispatch => ({
+    removeBook: (id) => {
+        dispatch(removeOneBook(id))
     }
-}
+})
 
 export default connect(
     mapStateToProps,

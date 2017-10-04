@@ -11,3 +11,9 @@ export function content (id, num) {
 export function list (id) {
     return http.get(`novels/directory/${id}`)
 }
+export function register (user) {
+    return http.post(`user/register`, user)
+}
+export function login (account, password) {
+    return http.post(`user/login`, {account, password})
+}

@@ -1,7 +1,10 @@
 import axios from 'axios';
 import { Toast } from 'antd-mobile';
+import { store } from '../App'
+
 axios.defaults.baseURL = `http://localhost:5000`;
 function interceptorsRequestSuccess (config) {
+    config.headers.Authorization = store.getState().token.token
     return config
 }
 

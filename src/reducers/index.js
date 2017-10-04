@@ -5,6 +5,7 @@ import content from './content';
 import list from './list';
 import bookshelf from './bookshelf';
 import config from './config';
+import token from './token';
 export default combineReducers({
     search,
     detail,
@@ -12,5 +13,6 @@ export default combineReducers({
     list,
     bookshelf,
     config,
+    token,
   })
   

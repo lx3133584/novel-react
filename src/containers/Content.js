@@ -23,13 +23,11 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    getContent: (id, num) => {
-        dispatch(fetchContent(id, num))
-    }
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  getContent: (id, num) => {
+      dispatch(fetchContent(id, num))
   }
-}
+})
 
 export default withRouter(connect(
     mapStateToProps,

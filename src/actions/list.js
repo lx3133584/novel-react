@@ -7,7 +7,7 @@ export const FETCH_LIST_FAILURE = 'FETCH_LIST_FAILURE';
 const fetchListRequest = () => ({
     type: FETCH_LIST_REQUEST
 })
-const fetchListSuccess = (result) => ({
+const fetchListSuccess = result => ({
     type: FETCH_LIST_SUCCESS,
     result
 })

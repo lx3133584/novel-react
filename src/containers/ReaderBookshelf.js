@@ -5,6 +5,7 @@ import ReaderBookshelf from '../components/ReaderBookshelf';
 const mapStateToProps = (state, ownProps) => {
     return {
         list: state.bookshelf.list,
+        token: state.token.token,
     }
 }
 

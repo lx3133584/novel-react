@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { HashRouter, Switch, Route } from 'react-router-dom';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
@@ -35,7 +35,7 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <BrowserRouter>
+        <HashRouter>
           <div className="App">
             <Switch>
               <Route path="/" exact component={Home}/>
@@ -55,7 +55,7 @@ class App extends Component {
               <Route path="/my" component={TabBar}/>
             </Switch>
           </div>
-        </BrowserRouter>
+        </HashRouter>
       </Provider>
     );
   }

@@ -17,6 +17,9 @@ export function register (user) {
 export function login (account, password) {
     return http.post(`user/login`, {account, password})
 }
+export function getInfo () {
+    return http.get(`user`)
+}
 export function getBookshelf () {
     return http.get(`bookshelf`)
 }

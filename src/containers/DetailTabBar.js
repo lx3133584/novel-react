@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { fetchAddBook } from '../actions';
+import { fetchAddBook, fetchDetail } from '../actions';
 import DetailTabBar from '../components/DetailTabBar';
 import { withRouter } from 'react-router-dom';
 
@@ -11,7 +11,10 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = dispatch => ({
     add: (id) => {
-        dispatch(fetchAddBook(id))
+        return dispatch(fetchAddBook(id))
+    },
+    getDetail: (id, name, url) => {
+        dispatch(fetchDetail(id, name, url))
     }
 })
 

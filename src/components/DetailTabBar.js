@@ -35,8 +35,11 @@ export default class DetailTabBar extends Component {
     }
     add() {
         if (this.props.isAdd) return
-        this.props.add(this.props.id)
-        Toast.success('加入书架成功', 1);
+        this.props.add(this.props.id).then(res => {
+            if (!res.status) return
+            this.props.getDetail(this.props.id)
+            Toast.info('加入书架成功', 1);
+        })
     }
     read() {
         this.props.history.push(`/content/${this.props.id}/0`)

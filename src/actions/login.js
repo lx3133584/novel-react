@@ -4,6 +4,7 @@ export const FETCH_LOGIN_REQUEST = 'FETCH_LOGIN_REQUEST';
 export const FETCH_LOGIN_SUCCESS = 'FETCH_LOGIN_SUCCESS';
 export const FETCH_LOGIN_FAILURE = 'FETCH_LOGIN_FAILURE';
 export const INIT_TOKEN = 'INIT_TOKEN';
+export const REMOVE_TOKEN = 'REMOVE_TOKEN';
 
 const fetchLoginRequest = (account, password) => ({
     type: FETCH_LOGIN_REQUEST,
@@ -20,6 +21,9 @@ const fetchLoginFailure = error => ({
 })
 export const initToken = () => ({
   type: INIT_TOKEN
+})
+export const removeToken = () => ({
+  type: REMOVE_TOKEN
 })
 export const fetchLogin = (account, password) => dispatch => {
     dispatch(fetchLoginRequest(account, password))

@@ -1,10 +1,18 @@
 import React from 'react';
 import { NavBar } from 'antd-mobile';
 
-export default function Header({onLeftClick, more, title}) {
+export default function Header({onLeftClick, more, title, fixed}) {
+    const headerStyle = fixed ? { 
+        position: 'fixed',
+        width: '100%',
+        top: 0,
+        zIndex: 1,
+    } : {}
     return (
-        <NavBar
+        <div style={{height: '0.9rem'}}>
+            <NavBar
             mode="dark"
+            style={headerStyle}
             iconName={null}
             onLeftClick={onLeftClick}
             leftContent={
@@ -16,5 +24,7 @@ export default function Header({onLeftClick, more, title}) {
         >
             {title}
         </NavBar>
+        </div>
+        
     );
 }

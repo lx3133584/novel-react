@@ -1,22 +1,13 @@
 import { connect } from 'react-redux';
-import { fetchContent, updateOneBook } from '../actions';
+import { fetchContent, updateProgress } from '../actions';
 import Content from '../components/Content';
 import { withRouter } from 'react-router-dom';
 
 const mapStateToProps = (state, ownProps) => {
-  let content = state.content
-  let bookshelf = state.bookshelf
-  let uid = content.params.category + content.params.ids
-  let {cur, total, title, first_id} = content
-  let book = cur && bookshelf.list.indexOf(uid) !== -1 ? {...bookshelf.data[uid], cur: bookshelf.data[uid].cur && cur < bookshelf.data[uid].cur ? bookshelf.data[uid].cur : cur, total, first_id} : null
   return {
-    content: content.content,
-    title,
-    cur,
-    total,
-    first_id,
-    loading: content.isFetching,
-    book,
+    data: state.content.data,
+    total: state.content.total,
+    loading: state.content.isFetching,
     fontSize: state.config.fontSize,
     lineHeight: state.config.lineHeight,
     background: state.config.background,
@@ -25,8 +16,11 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   getContent: (id, num) => {
-      dispatch(fetchContent(id, num))
-  }
+      return dispatch(fetchContent(id, num))
+  },
+  updateProgress: (id, num) => {
+      dispatch(updateProgress(id, num))
+  },
 })
 
 export default withRouter(connect(

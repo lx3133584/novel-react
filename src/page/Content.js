@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Content from '../containers/Content.js';
 import ContentTabBar from '../containers/ContentTabBar.js';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import './Content.css';
 
 export default class ContentPage extends Component {
     constructor(props) {
@@ -18,7 +20,13 @@ export default class ContentPage extends Component {
     render() {
         return (
             <div>
-                {this.state.isShow && <ContentTabBar showPopup={this.showPopup}/>}
+                <ReactCSSTransitionGroup
+                    transitionName="slide"
+                    component="div"
+                    transitionEnterTimeout={300}
+                    transitionLeaveTimeout={300}>
+                    {this.state.isShow && <ContentTabBar showPopup={this.showPopup}/>}
+                </ReactCSSTransitionGroup>
                 <Content showPopup={this.showPopup}/>
             </div>
         );

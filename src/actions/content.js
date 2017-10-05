@@ -8,9 +8,9 @@ const fetchContentRequest = (params) => ({
     type: FETCH_CONTENT_REQUEST,
     params
 })
-const fetchContentSuccess = (result) => ({
+const fetchContentSuccess = (res) => ({
     type: FETCH_CONTENT_SUCCESS,
-    result
+    res
 })
 const fetchContentFailure = error => ({
     type: FETCH_CONTENT_FAILURE,
@@ -19,9 +19,11 @@ const fetchContentFailure = error => ({
 export const fetchContent = (id, num) => dispatch => {
     dispatch(fetchContentRequest({id, num}))
     return content(id, num).then(res => {
-        dispatch(fetchContentSuccess(res.data))
+        dispatch(fetchContentSuccess(res))
+        return {...res, status: true}
     }).catch(error => {
         dispatch(fetchContentFailure(error))
+        return {...error, status: false}
     })
 }
 

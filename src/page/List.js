@@ -5,7 +5,7 @@ export default class extends Component {
     render() {
         return (
             <div>
-                <Header title="目录" onLeftClick={this.props.history.goBack}/>
+                <Header fixed title="目录" onLeftClick={this.props.history.goBack}/>
                 <List />
             </div>
         );

@@ -1,0 +1,37 @@
+.top {
+  top: 0;
+}
+.bottom {
+  bottom: 0;
+}
+.slide-enter .top {
+  transition: all 0.3s;
+  top: -0.9rem;
+}
+.slide-enter .bottom {
+  transition: all 0.3s;
+  bottom: -3rem;
+}
+
+.slide-enter.slide-enter-active .top {
+  top: 0;
+}
+.slide-enter.slide-enter-active .bottom {
+  bottom: 0;
+}
+.slide-leave .top {
+  top: 0;
+  transition: all 0.3s;
+}
+.slide-leave .bottom {
+  bottom: 0;
+  transition: all 0.3s;
+}
+
+.slide-leave.slide-leave-active .top {
+  top: -0.9rem;
+}
+.slide-leave.slide-leave-active .bottom {
+  bottom: -3rem;
+}
+

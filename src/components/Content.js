@@ -2,31 +2,25 @@ import React, { Component } from 'react';
 import { WingBlank, ActivityIndicator, Pagination } from 'antd-mobile';
 export default class Content extends Component {
     componentDidMount() {
-        let {id, num} = this.props.match.params
-        this.props.getContent(id, num)
-    }
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.cur !== this.props.cur) {
-            this.updateReadProgress(nextProps.book)
-        }
-    }
-    updateReadProgress(book) {
-        book && this.props.updateReadProgress(book)
+        this.goNext(0)
     }
     goNext(next) {
-        let params = this.props.match.params
-        this.props.getContent(params.category, params.ids, +this.props.first_id + next)
+        let {id, num} = this.props.match.params
+        this.props.getContent(id, +num + next).then(res => {
+            if (!res.status) return
+            this.props.updateProgress(id, +num + next)
+        }) 
     }
     render() {
         return (
             <div style={{ padding: '0.5em 0', backgroundColor: '#fff' }}>
                 {this.props.loading && <ActivityIndicator size="large" toast text="正在加载..." />}
-                <h2 style={{ fontSize: this.props.fontSize * 1.6 + 'px', margin: '0', padding: '0.5em 0', textAlign: 'center' }}>{this.props.title}</h2>
+                <h2 style={{ fontSize: this.props.fontSize * 1.6 + 'px', margin: '0', padding: '0.5em 0', textAlign: 'center' }}>{this.props.data.title}</h2>
                 <WingBlank>
-                    <p onClick={this.props.showPopup} style={{minHeight: '80vh', fontSize: this.props.fontSize + 'px', lineHeight: this.props.lineHeight, }} dangerouslySetInnerHTML={{ __html: this.props.content }}></p>
+                    <p onClick={this.props.showPopup} style={{minHeight: '80vh', fontSize: this.props.fontSize + 'px', lineHeight: this.props.lineHeight, }} dangerouslySetInnerHTML={{ __html: this.props.data.content }}></p>
                     <Pagination total={this.props.total}
                         className="custom-pagination-with-icon"
-                        current={this.props.cur - 1}
+                        current={this.props.data.number}
                         onChange={this.goNext.bind(this)}
                         locale={{
                             prevText: (<span className="arrow-align">上一页</span>),

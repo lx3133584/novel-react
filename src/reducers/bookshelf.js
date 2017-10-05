@@ -1,4 +1,4 @@
-import { FETCH_GET_BOOKSHELF_REQUEST, FETCH_GET_BOOKSHELF_SUCCESS, FETCH_GET_BOOKSHELF_FAILURE, FETCH_ADD_BOOK_REQUEST, FETCH_ADD_BOOK_SUCCESS, FETCH_ADD_BOOK_FAILURE, FETCH_REMOVE_BOOK_REQUEST, FETCH_REMOVE_BOOK_SUCCESS, FETCH_REMOVE_BOOK_FAILURE } from '../actions'
+import { FETCH_GET_BOOKSHELF_REQUEST, FETCH_GET_BOOKSHELF_SUCCESS, FETCH_GET_BOOKSHELF_FAILURE, FETCH_ADD_BOOK_REQUEST, FETCH_ADD_BOOK_SUCCESS, FETCH_ADD_BOOK_FAILURE, FETCH_REMOVE_BOOK_REQUEST, FETCH_REMOVE_BOOK_SUCCESS, FETCH_REMOVE_BOOK_FAILURE, UPDATE_PROGRESS_REQUEST, UPDATE_PROGRESS_SUCCESS, UPDATE_PROGRESS_FAILURE } from '../actions'
 
 export default (state = {
     isFetching: false,
@@ -55,6 +55,23 @@ export default (state = {
             }
         
         case FETCH_REMOVE_BOOK_FAILURE:
+            return {
+                ...state,
+                isFetching: false,
+            }
+        case UPDATE_PROGRESS_REQUEST:
+            return {
+                ...state,
+                isFetching: true,
+            }
+        
+        case UPDATE_PROGRESS_SUCCESS:
+            return {
+                ...state,
+                isFetching: false,
+            }
+        
+        case UPDATE_PROGRESS_FAILURE:
             return {
                 ...state,
                 isFetching: false,

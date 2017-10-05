@@ -1,4 +1,4 @@
-import { getBookshelf, addBook, removeBook } from '../api';
+import { getBookshelf, addBook, removeBook, fetchUpdateProgress } from '../api';
 
 // 获取我的书架列表
 export const FETCH_GET_BOOKSHELF_REQUEST = 'FETCH_GET_BOOKSHELF_REQUEST';
@@ -75,6 +75,32 @@ export const fetchRemoveBook = (id) => dispatch => {
         return {...res, status: true}
     }).catch(error => {
         dispatch(fetchRemoveBookFailure(error))
+        return {...error, status: false}
+    })
+}
+
+// 更新阅读进度
+export const UPDATE_PROGRESS_REQUEST = 'UPDATE_PROGRESS_REQUEST';
+export const UPDATE_PROGRESS_SUCCESS = 'UPDATE_PROGRESS_SUCCESS';
+export const UPDATE_PROGRESS_FAILURE = 'UPDATE_PROGRESS_FAILURE';
+
+const updateProgressRequest = () => ({
+    type: UPDATE_PROGRESS_REQUEST
+})
+const updateProgressSuccess = () => ({
+    type: UPDATE_PROGRESS_SUCCESS
+})
+const updateProgressFailure = error => ({
+    type: UPDATE_PROGRESS_FAILURE,
+    error
+})
+export const updateProgress = (id, num) => dispatch => {
+    dispatch(updateProgressRequest())
+    return fetchUpdateProgress(id, num).then(res => {
+        dispatch(updateProgressSuccess())
+        return {...res, status: true}
+    }).catch(error => {
+        dispatch(updateProgressFailure(error))
         return {...error, status: false}
     })
 }

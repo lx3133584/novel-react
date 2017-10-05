@@ -4,7 +4,7 @@ import { changeFontSize, changeLineHeight, changeBackground } from '../actions';
 import { withRouter } from 'react-router-dom';
 
 const mapStateToProps = (state, ownProps) => ({
-    title: state.content.title,
+    title: state.content.data.title,
     fontSize: state.config.fontSize,
     lineHeight: state.config.lineHeight,
     background: state.config.background,

@@ -29,4 +29,6 @@ export function addBook (id) {
 export function removeBook (id) {
     return http.post(`bookshelf/delete`, {id})
 }
-
+export function fetchUpdateProgress (id, num) {
+    return http.post(`chapters/progress`, {id, num})
+}

@@ -39,7 +39,7 @@ export default class ReaderBookshelf extends Component {
                 ]}
             ><Book
                     to={{
-                        pathname: `/content/${item._id}/${itemBox.progress}`
+                        pathname: `/content/${item._id}/${itemBox.progress && itemBox.progress - 1}`
                     }}
                     pic={item.img}
                     title={item.name}

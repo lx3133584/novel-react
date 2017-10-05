@@ -3,6 +3,10 @@ import Header from '../components/Header.js';
 import { Grid, Slider, createTooltip, WhiteSpace, WingBlank, Button } from 'antd-mobile';
 import './Content.less';
 const SliderWithTooltip = createTooltip(Slider);
+const fixedStyle={
+    position: 'fixed',
+    width: '100%',
+}
 export default class ContentTabBar extends Component {
     constructor(props) {
         super(props)
@@ -71,10 +75,10 @@ export default class ContentTabBar extends Component {
     render() {
         return (
             <div>
-                <div style={{ position: 'fixed', width: '100%', top: 0 }}>
+                <div className="top" style={{ ...fixedStyle }}>
                     <Header title={this.props.title} onLeftClick={this.props.history.goBack} />
                 </div>
-                <div style={{ position: 'fixed', background: '#fff', width: '100%', bottom: 0, boxShadow: ' #4b4b4b 0 0 0.2rem' }}>
+                <div className="bottom" style={{ ...fixedStyle, background: '#fff', boxShadow: ' #4b4b4b 0 0 0.2rem' }}>
                     {this.state.step === 'index' && <Grid data={this.indexMap} columnNum={3} onClick={item => item.handler()} />}
                     {this.state.step === 'config' && <WingBlank>
                         <Grid data={this.configMap} columnNum={3} onClick={item => item.handler()} />

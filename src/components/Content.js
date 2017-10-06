@@ -9,7 +9,7 @@ export default class Content extends Component {
         let {id, num} = this.props.match.params
         this.props.getContent(id, next).then(res => {
             if (!res.status) return
-            this.props.updateProgress(id, next)
+            if (this.props.token) this.props.updateProgress(id, next)
         }) 
     }
     render() {

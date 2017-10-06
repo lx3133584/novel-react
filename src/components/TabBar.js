@@ -37,13 +37,15 @@ class Bar extends Component {
     }
     render() {
         return (
-            <TabBar
-                unselectedTintColor="#949494"
-                tintColor="#33A3F4"
-                barTintColor="white"
-            >
-            {this.itemMap.map(item => this.renderItem(item))}
-            </TabBar>
+            <div style={{height: '1rem'}}>
+                <TabBar
+                    unselectedTintColor="#949494"
+                    tintColor="#33A3F4"
+                    barTintColor="white"
+                >
+                {this.itemMap.map(item => this.renderItem(item))}
+                </TabBar>
+            </div>
         );
     }
 }

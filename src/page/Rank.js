@@ -6,7 +6,7 @@ class Rank extends Component {
       return (
         <div>
             <Header title="排行榜"/>
-            感觉没什么用,不想做
+            感觉没(tai)用(lan),暂时不想做
         </div>
       );
     }

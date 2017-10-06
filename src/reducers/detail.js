@@ -1,4 +1,4 @@
-import { FETCH_DETAIL_REQUEST, FETCH_DETAIL_SUCCESS, FETCH_DETAIL_FAILURE } from '../actions'
+import { FETCH_DETAIL_REQUEST, FETCH_DETAIL_SUCCESS, FETCH_DETAIL_FAILURE, MARK_ADD_BOOK } from '../actions'
 
 export default (state = {
     isFetching: false,
@@ -22,6 +22,11 @@ export default (state = {
                 ...state,
                 isFetching: false,
                 error: action.error
+            }
+        case MARK_ADD_BOOK:
+            return {
+                ...state,
+                result: {...state.result, join: true},
             }
         default:
             return state

@@ -11,6 +11,7 @@ const mapStateToProps = (state, ownProps) => {
     fontSize: state.config.fontSize,
     lineHeight: state.config.lineHeight,
     background: state.config.background,
+    token: state.token.token,
   }
 }
 

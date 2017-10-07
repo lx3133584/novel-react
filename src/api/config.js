@@ -3,8 +3,7 @@ import { Toast } from 'antd-mobile';
 import { store } from '../App';
 import { removeToken } from '../actions';
 
-axios.defaults.baseURL = `http://localhost:5000`;
-// axios.defaults.baseURL = `http://api.0lx.top/`;
+axios.defaults.baseURL = process.env.NODE_ENV === 'production' ? `http://api.0lx.top/` : `http://localhost:5000`;
 
 function interceptorsRequestSuccess (config) {
     config.headers.Authorization = store.getState().token.token

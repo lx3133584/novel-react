@@ -18,7 +18,7 @@ export default class ReaderBookshelf extends Component {
         })
     }
     render() {
-        {if (this.props.token) {
+        if (this.props.token) {
             return <div>
             {this.props.list.map(itemBox => {
                 const item = itemBox.novel
@@ -68,7 +68,7 @@ export default class ReaderBookshelf extends Component {
         </div>} else {
             return <LoginBtn />
         }
-        }
     }
+    
     
 }

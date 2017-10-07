@@ -61,17 +61,16 @@ export default class ReaderBookshelf extends Component {
         
     }
     render() {
-        {if (this.props.token) {
+        if (this.props.token) {
           const info = this.props.info
             return <div>
               <div style={avatarBoxStyle}>
-                <img style={avatarStyle} src={info.avatar || defaultAvatar} />
+                <img style={avatarStyle} src={info.avatar || defaultAvatar} alt="头像加载失败" />
                 <h2 style={nameStyle}>{info.name}</h2>
               </div>
               <Grid data={this.menuMap} columnNum={3} onClick={item => item.handler()} />
             </div>} else {
             return <LoginBtn />
-        }
         }
     }
     

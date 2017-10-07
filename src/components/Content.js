@@ -6,7 +6,7 @@ export default class Content extends Component {
         this.goNext(+num)
     }
     goNext(next) {
-        let {id, num} = this.props.match.params
+        let {id} = this.props.match.params
         this.props.getContent(id, next).then(res => {
             if (!res.status) return
             if (this.props.token) this.props.updateProgress(id, next)

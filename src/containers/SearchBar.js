@@ -2,6 +2,12 @@ import { connect } from 'react-redux';
 import { fetchSearch, saveSearchKeyword } from '../actions';
 import { SearchBar } from 'antd-mobile';
 
+const mapStateToProps = (state, ownProps) => {
+    return {
+        autoFocus: true
+    }
+}
+
 const mapDispatchToProps = dispatch => ({
   onSubmit: (keyword) => {
       if(!keyword) return
@@ -11,6 +17,6 @@ const mapDispatchToProps = dispatch => ({
 })
 
 export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
   )(SearchBar)

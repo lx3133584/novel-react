@@ -1,4 +1,4 @@
-import { getInfo } from '../api'
+import { getInfo, editName } from '../api'
 
 export const FETCH_INFO_REQUEST = 'FETCH_INFO_REQUEST';
 export const FETCH_INFO_SUCCESS = 'FETCH_INFO_SUCCESS';
@@ -26,3 +26,28 @@ export const fetchInfo = () => dispatch => {
     })
 }
 
+export const FETCH_EDIT_NAME_REQUEST = 'FETCH_EDIT_NAME_REQUEST';
+export const FETCH_EDIT_NAME_SUCCESS = 'FETCH_EDIT_NAME_SUCCESS';
+export const FETCH_EDIT_NAME_FAILURE = 'FETCH_EDIT_NAME_FAILURE';
+
+const fetchEditNameRequest = name => ({
+    type: FETCH_EDIT_NAME_REQUEST,
+    name
+})
+const fetchEditNameSuccess = () => ({
+    type: FETCH_EDIT_NAME_SUCCESS
+})
+const fetchEditNameFailure = error => ({
+    type: FETCH_EDIT_NAME_FAILURE,
+    error
+})
+export const fetchEditName = (name) => dispatch => {
+    dispatch(fetchEditNameRequest(name))
+    return editName(name).then(res => {
+        dispatch(fetchEditNameSuccess())
+        return {...res, status: true}
+    }).catch(error => {
+        dispatch(fetchEditNameFailure(error))
+        return {...error, status: false}
+    })
+}

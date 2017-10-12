@@ -20,6 +20,9 @@ export function login (account, password) {
 export function getInfo () {
     return http.get(`user`)
 }
+export function editName (name) {
+    return http.post(`user/edit_name`, {name})
+}
 export function getBookshelf () {
     return http.get(`bookshelf`)
 }

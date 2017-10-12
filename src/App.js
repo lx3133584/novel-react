@@ -9,6 +9,7 @@ import Home from './page/Home.js';
 import Rank from './page/Rank.js';
 import Search from './page/Search.js';
 import My from './page/My.js';
+import EditName from './page/EditName.js';
 import Login from './page/Login.js';
 import Register from './page/Register.js';
 import Detail from './page/Detail.js';
@@ -41,7 +42,8 @@ class App extends Component {
               <Route path="/" exact component={Home}/>
               <Route path="/rank" component={Rank}/>
               <Route path="/search" component={Search}/>
-              <Route path="/my" component={My}/>
+              <Route path="/my" exact component={My}/>
+              <Route path="/my/edit_name/:name?" component={EditName}/>
               <Route path="/login" component={Login}/>
               <Route path="/register" component={Register}/>
               <Route path="/detail/:id/:name?/:url?" component={Detail}/>
@@ -52,7 +54,7 @@ class App extends Component {
               <Route path="/" exact component={TabBar}/>
               <Route path="/rank" component={TabBar}/>
               <Route path="/search" component={TabBar}/>
-              <Route path="/my" component={TabBar}/>
+              <Route path="/my" exact component={TabBar}/>
             </Switch>
           </div>
         </BrowserRouter>

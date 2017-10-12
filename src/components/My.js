@@ -17,7 +17,7 @@ const nameStyle = {
   textAlign: 'center',
   marginTop: 0,
 }
-export default class ReaderBookshelf extends Component {
+export default class My extends Component {
   constructor() {
     super()
     const icon = (iconfont) => <i className={`iconfont icon-${iconfont}`} style={{ fontSize: '0.6rem' }}></i>
@@ -25,7 +25,7 @@ export default class ReaderBookshelf extends Component {
       {
           icon: icon('modify'),
           text: '修改昵称',
-          handler: () => this.setState({ step: 'fontSize' })
+          handler: () => this.props.history.push(`/my/edit_name/${this.props.info.name}`)
       },
       {
           icon: icon('password'),
@@ -58,7 +58,7 @@ export default class ReaderBookshelf extends Component {
           }
         }
       ])
-        
+
     }
     render() {
         if (this.props.token) {
@@ -73,5 +73,5 @@ export default class ReaderBookshelf extends Component {
             return <LoginBtn />
         }
     }
-    
+
 }

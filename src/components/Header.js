@@ -1,8 +1,8 @@
 import React from 'react';
 import { NavBar } from 'antd-mobile';
 
-export default function Header({onLeftClick, more, title, fixed}) {
-    const headerStyle = fixed ? { 
+export default function Header({onLeftClick, rightContent, title, fixed}) {
+    const headerStyle = fixed ? {
         position: 'fixed',
         width: '100%',
         top: 0,
@@ -19,12 +19,12 @@ export default function Header({onLeftClick, more, title, fixed}) {
                 onLeftClick && <i className="iconfont icon-back" style={{ fontSize: '0.45rem' }}></i>
             }
             rightContent={
-                more && <i className="iconfont icon-ellipsis" style={{ fontSize: '0.4rem' }}></i>
+                rightContent
             }
         >
             {title}
         </NavBar>
         </div>
-        
+
     );
 }

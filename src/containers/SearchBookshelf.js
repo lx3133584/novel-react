@@ -4,14 +4,13 @@ import Bookshelf from '../components/Bookshelf';
 
 const mapStateToProps = (state, ownProps) => ({
   data: state.search.results,
-  count: state.search.count,
   isLoading: state.search.isFetching,
   keyword: state.search.keyword,
 })
 
 const mapDispatchToProps = dispatch => ({
   getData: (pageNo, keyword) => {
-    dispatch(fetchSearch(keyword, pageNo))
+    return dispatch(fetchSearch(keyword, pageNo))
   }
 })
 

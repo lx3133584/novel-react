@@ -8,10 +8,9 @@ export const SAVE_SEARCH_KEYWORD = 'SAVE_SEARCH_KEYWORD';
 const fetchSearchRequest = () => ({
     type: FETCH_SEARCH_REQUEST
 })
-const fetchSearchSuccess = (results, count) => ({
+const fetchSearchSuccess = results => ({
     type: FETCH_SEARCH_SUCCESS,
-    results,
-    count
+    results
 })
 const fetchSearchFailure = error => ({
     type: FETCH_SEARCH_FAILURE,
@@ -24,9 +23,10 @@ export const saveSearchKeyword = keyword => ({
 export const fetchSearch = (keyword, pageNo) => dispatch => {
     dispatch(fetchSearchRequest())
     return search(keyword, pageNo).then(res => {
-        dispatch(fetchSearchSuccess(res.data, res.count))
+        dispatch(fetchSearchSuccess(res.data))
+        return {...res, status: true}
     }).catch(error => {
         dispatch(fetchSearchFailure(error))
+        return {...error, status: false}
     })
 }
-

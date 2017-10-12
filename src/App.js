@@ -16,6 +16,7 @@ import Detail from './page/Detail.js';
 import Content from './page/Content.js';
 import List from './page/List.js';
 import TabBar from './components/TabBar.js';
+import './App.css'
 
 const win = window;
 const isNotProduction = process.env.NODE_ENV !== 'production';

@@ -28,8 +28,10 @@ class Bookshelf extends Component {
         if (this.props.isLoading || !this.hasMore) {
             return;
         }
-        this.props.getData(++this.pageIndex, this.props.keyword)
-        if (this.pageIndex === Math.floor(this.props.count / this.PAGE_SIZE)) this.hasMore = false
+        this.props.getData(++this.pageIndex, this.props.keyword).then(res => {
+          if (!res.status) return
+          if (!res.data.length) this.hasMore = false
+        })
     }
 
     render() {

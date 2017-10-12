@@ -10,18 +10,19 @@ export default class Content extends Component {
         this.props.getContent(id, next).then(res => {
             if (!res.status) return
             if (this.props.token) this.props.updateProgress(id, next)
-        }) 
+        })
     }
     render() {
+      const {background, color, lineHeight, loading, fontSize, data, total, showPopup} = this.props
         return (
-            <div style={{ padding: '0.5em 0', backgroundColor: '#fff' }}>
-                {this.props.loading && <ActivityIndicator size="large" toast text="正在加载..." />}
-                <h2 style={{ fontSize: this.props.fontSize * 1.6 + 'px', margin: '0', padding: '0.5em 0', textAlign: 'center' }}>{this.props.data.title}</h2>
+            <div style={{ padding: '0.5em 0', backgroundColor: background, color }}>
+                {loading && <ActivityIndicator size="large" toast text="正在加载..." />}
+                <h2 style={{ fontSize: fontSize * 1.6 + 'px', margin: '0', padding: '0.5em 0', textAlign: 'center' }}>{data.title}</h2>
                 <WingBlank>
-                    <p onClick={this.props.showPopup} style={{minHeight: '80vh', fontSize: this.props.fontSize + 'px', lineHeight: this.props.lineHeight, }} dangerouslySetInnerHTML={{ __html: this.props.data.content }}></p>
-                    <Pagination total={this.props.total}
+                    <p onClick={showPopup} style={{minHeight: '80vh', fontSize: fontSize + 'px', lineHeight: lineHeight, }} dangerouslySetInnerHTML={{ __html: data.content }}></p>
+                    <Pagination total={total}
                         className="custom-pagination-with-icon"
-                        current={this.props.data.number}
+                        current={data.number}
                         onChange={this.goNext.bind(this)}
                         locale={{
                             prevText: (<span className="arrow-align">上一页</span>),

@@ -3,7 +3,6 @@ import { FETCH_SEARCH_REQUEST, FETCH_SEARCH_SUCCESS, FETCH_SEARCH_FAILURE, SAVE_
 export default (state = {
     isFetching: false,
     results: [],
-    count: 0,
     keyword: ''
 }, action) => {
     switch (action.type) {
@@ -17,7 +16,6 @@ export default (state = {
                 ...state,
                 isFetching: false,
                 results: [...state.results, ...action.results],
-                count: action.count
             }
         case FETCH_SEARCH_FAILURE:
             return {

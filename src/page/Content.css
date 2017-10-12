@@ -10,7 +10,7 @@
 }
 .slide-enter .bottom {
   transition: all 0.3s;
-  bottom: -3rem;
+  bottom: -25vw;
 }
 
 .slide-enter.slide-enter-active .top {
@@ -32,6 +32,5 @@
   top: -0.9rem;
 }
 .slide-leave.slide-leave-active .bottom {
-  bottom: -3rem;
+  bottom: -25vw;
 }
-

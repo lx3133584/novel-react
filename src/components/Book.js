@@ -10,7 +10,12 @@ export default function BOOK({ to, pic, title, author, detailList }) {
             <div style={{ width: '70%' }}>
                 {title && <div style={{ fontSize: '0.3rem', marginBottom: '0.1rem' }}>{title}</div>}
                 {author && <div style={{ color: '#a4a4a4', marginBottom: '0.1rem' }}>{author}</div>}
-                {detailList.map(item => (!item.isShow || item.isShow()) && <div style={{ fontSize: '0.2rem', marginBottom: '0.2rem' }} key={item.key}>{item.key}: {item.value}</div>)}
+                {detailList.map(item => (!item.isShow || item.isShow()) && <div
+                  style={{ fontSize: '0.2rem', marginBottom: '0.2rem' }}
+                  key={item.key}>
+                  {item.key}: {item.value.slice(0, 120)}
+                  {item.value.length > 120 && <span>...</span>}
+                </div>)}
             </div>
         </Link>
     );

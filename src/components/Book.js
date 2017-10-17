@@ -13,8 +13,8 @@ export default function BOOK({ to, pic, title, author, detailList }) {
                 {detailList.map(item => (!item.isShow || item.isShow()) && <div
                   style={{ fontSize: '0.2rem', marginBottom: '0.2rem' }}
                   key={item.key}>
-                  {item.key}: {item.value.slice(0, 120)}
-                  {item.value.length > 120 && <span>...</span>}
+                  {item.key}: {typeof item.value === 'string' ? item.value.slice(0, 120) : item.value}
+                  {typeof item.value === 'string' && item.value.length > 120 && <span>...</span>}
                 </div>)}
             </div>
         </Link>

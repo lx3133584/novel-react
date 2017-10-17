@@ -11,6 +11,9 @@ export function content (id, num) {
 export function list (id) {
     return http.get(`novels/directory/${id}`)
 }
+export function getRank () {
+    return http.get(`novels/rank`)
+}
 export function register (user) {
     return http.post(`user/register`, user)
 }

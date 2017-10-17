@@ -7,6 +7,8 @@ import bookshelf from './bookshelf';
 import config from './config';
 import token from './token';
 import user from './user';
+import rank from './rank';
+
 export default combineReducers({
     search,
     detail,
@@ -16,5 +18,5 @@ export default combineReducers({
     config,
     token,
     user,
+    rank,
   })
-  

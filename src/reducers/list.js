@@ -2,7 +2,8 @@ import { FETCH_LIST_REQUEST, FETCH_LIST_SUCCESS, FETCH_LIST_FAILURE } from '../a
 
 export default (state = {
     isFetching: false,
-    title: '',    
+    title: '',
+    id: '',
     list: [],
 }, action) => {
     switch (action.type) {
@@ -10,6 +11,7 @@ export default (state = {
             return {
                 ...state,
                 list: [],
+                id: action.id,
                 isFetching: true
             }
         case FETCH_LIST_SUCCESS:

@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom';
 const mapStateToProps = (state, ownProps) => ({
   list: state.list.list,
   title: state.list.title,
+  id: state.list.id,
   loading: state.list.isFetching,
 })
 

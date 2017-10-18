@@ -3,8 +3,7 @@ import { List, ActivityIndicator } from 'antd-mobile';
 export default class extends Component {
     componentDidMount() {
         let {id} = this.props.match.params
-        this.props.getList(id)
-        console.log(this)
+        this.props.id === id || this.props.getList(id)
     }
     goContent(num) {
         let _this = this

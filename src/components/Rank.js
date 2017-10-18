@@ -9,19 +9,20 @@ export default class RankComponent extends Component {
         return (
             <div>
                 {this.props.loading && <ActivityIndicator size="large" toast text="正在加载..." />}
-                {this.props.rank.map(rankType => <List renderHeader={() => rankType.type} key={rankType._id}>
-                      {rankType.rank.map(item => <Book
-                          key={item._id}
+                {this.props.rank.map(rankType => <List renderHeader={() => rankType.type} key={rankType.type}>
+                      {rankType.rank.map(({novel, num}) => <Book
+                          key={novel._id}
                           to={{
-                              pathname: `/detail/${item._id}`
+                              pathname: `/detail/${novel._id}`
                           }}
-                          pic={item.img}
-                          title={item.name}
-                          author={item.author}
+                          num={num + 1}
+                          pic={novel.img}
+                          title={novel.name}
+                          author={novel.author}
                           detailList={[
                               {
                                   key: '简介',
-                                  value: item.introduction
+                                  value: novel.introduction
                               }
                           ]}
                       />)}

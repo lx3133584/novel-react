@@ -19,12 +19,17 @@ export default class Edit extends Component {
   }
   onSubmit() {
     const {items} = this.state
+<<<<<<< HEAD
     let breakFlag
     const params = items.map(item => {
       if (!item.value) breakFlag = true
       return item.value
     })
     if (breakFlag) return
+=======
+    const params = items.map(item => item.value)
+
+>>>>>>> d9e2e12a12783c3c90dcdcfd12457c83d86ee49c
     this.props.save(...params).then(res => {
       if (!res.status) return
       Toast.info('修改成功', 1)

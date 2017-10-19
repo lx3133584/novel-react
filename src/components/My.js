@@ -30,7 +30,7 @@ export default class My extends Component {
       {
           icon: icon('password'),
           text: '修改密码',
-          handler: () => this.setState({ step: 'lineHeight' })
+          handler: () => this.props.history.push(`/my/modify_password`)
       },
       {
           icon: icon('logout'),

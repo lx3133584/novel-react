@@ -1,4 +1,4 @@
-import { getInfo, editName } from '../api'
+import { getInfo, editName, modifyPassword } from '../api'
 
 export const FETCH_INFO_REQUEST = 'FETCH_INFO_REQUEST';
 export const FETCH_INFO_SUCCESS = 'FETCH_INFO_SUCCESS';
@@ -48,6 +48,32 @@ export const fetchEditName = (name) => dispatch => {
         return {...res, status: true}
     }).catch(error => {
         dispatch(fetchEditNameFailure(error))
+        return {...error, status: false}
+    })
+}
+
+export const FETCH_MODIFY_PASSWORD_REQUEST = 'FETCH_MODIFY_PASSWORD_REQUEST';
+export const FETCH_MODIFY_PASSWORD_SUCCESS = 'FETCH_MODIFY_PASSWORD_SUCCESS';
+export const FETCH_MODIFY_PASSWORD_FAILURE = 'FETCH_MODIFY_PASSWORD_FAILURE';
+
+const fetchModifyPasswordRequest = (oldPassword, newPassword, newPassword2) => ({
+    type: FETCH_MODIFY_PASSWORD_REQUEST,
+    oldPassword, newPassword, newPassword2
+})
+const fetchModifyPasswordSuccess = () => ({
+    type: FETCH_MODIFY_PASSWORD_SUCCESS
+})
+const fetchModifyPasswordFailure = error => ({
+    type: FETCH_MODIFY_PASSWORD_FAILURE,
+    error
+})
+export const fetchModifyPassword = (oldPassword, newPassword, newPassword2) => dispatch => {
+    dispatch(fetchModifyPasswordRequest())
+    return modifyPassword(oldPassword, newPassword, newPassword2).then(res => {
+        dispatch(fetchModifyPasswordSuccess())
+        return {...res, status: true}
+    }).catch(error => {
+        dispatch(fetchModifyPasswordFailure(error))
         return {...error, status: false}
     })
 }

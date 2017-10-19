@@ -10,6 +10,7 @@ import Rank from './page/Rank.js';
 import Search from './page/Search.js';
 import My from './page/My.js';
 import EditName from './page/EditName.js';
+import ModifyPassword from './page/ModifyPassword.js';
 import Login from './page/Login.js';
 import Register from './page/Register.js';
 import Detail from './page/Detail.js';
@@ -45,6 +46,7 @@ class App extends Component {
               <Route path="/search" component={Search}/>
               <Route path="/my" exact component={My}/>
               <Route path="/my/edit_name/:name?" component={EditName}/>
+              <Route path="/my/modify_password" component={ModifyPassword}/>
               <Route path="/login" component={Login}/>
               <Route path="/register" component={Register}/>
               <Route path="/detail/:id/:name?/:url?" component={Detail}/>

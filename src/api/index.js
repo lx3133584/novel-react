@@ -20,6 +20,9 @@ export function register (user) {
 export function login (account, password) {
     return http.post(`user/login`, {account, password})
 }
+export function modifyPassword (oldPassword, newPassword, newPassword2) {
+    return http.post(`user/modify_password`, {oldPassword, newPassword, newPassword2})
+}
 export function getInfo () {
     return http.get(`user`)
 }

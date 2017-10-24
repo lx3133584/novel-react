@@ -29,6 +29,11 @@ export function getInfo () {
 export function editName (name) {
     return http.post(`user/edit_name`, {name})
 }
+export function uploadAvatar (file) {
+    let formData = new FormData();
+    formData.append('avatar', file);
+    return http.post(`user/avatar`, formData)
+}
 export function getBookshelf () {
     return http.get(`bookshelf`)
 }

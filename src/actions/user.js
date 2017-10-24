@@ -1,4 +1,4 @@
-import { getInfo, editName, modifyPassword } from '../api'
+import { getInfo, editName, modifyPassword, uploadAvatar } from '../api'
 
 export const FETCH_INFO_REQUEST = 'FETCH_INFO_REQUEST';
 export const FETCH_INFO_SUCCESS = 'FETCH_INFO_SUCCESS';
@@ -74,6 +74,32 @@ export const fetchModifyPassword = (oldPassword, newPassword, newPassword2) => d
         return {...res, status: true}
     }).catch(error => {
         dispatch(fetchModifyPasswordFailure(error))
+        return {...error, status: false}
+    })
+}
+
+export const FETCH_UPLOAD_AVATAR_REQUEST = 'FETCH_UPLOAD_AVATAR_REQUEST';
+export const FETCH_UPLOAD_AVATAR_SUCCESS = 'FETCH_UPLOAD_AVATAR_SUCCESS';
+export const FETCH_UPLOAD_AVATAR_FAILURE = 'FETCH_UPLOAD_AVATAR_FAILURE';
+
+const fetchUploadAvatarRequest = () => ({
+    type: FETCH_UPLOAD_AVATAR_REQUEST
+})
+const fetchUploadAvatarSuccess = data => ({
+    type: FETCH_UPLOAD_AVATAR_SUCCESS,
+    data
+})
+const fetchUploadAvatarFailure = error => ({
+    type: FETCH_UPLOAD_AVATAR_FAILURE,
+    error
+})
+export const fetchUploadAvatar = file => dispatch => {
+    dispatch(fetchUploadAvatarRequest())
+    return uploadAvatar(file).then(res => {
+        dispatch(fetchUploadAvatarSuccess(res.user))
+        return {...res, status: true}
+    }).catch(error => {
+        dispatch(fetchUploadAvatarFailure(error))
         return {...error, status: false}
     })
 }

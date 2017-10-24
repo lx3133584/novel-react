@@ -8,6 +8,9 @@ import {
   FETCH_MODIFY_PASSWORD_REQUEST,
   FETCH_MODIFY_PASSWORD_SUCCESS,
   FETCH_MODIFY_PASSWORD_FAILURE,
+  FETCH_UPLOAD_AVATAR_REQUEST,
+  FETCH_UPLOAD_AVATAR_SUCCESS,
+  FETCH_UPLOAD_AVATAR_FAILURE,
 } from '../actions'
 
 export default(state = {
@@ -61,6 +64,24 @@ export default(state = {
         isFetching: false,
       }
     case FETCH_MODIFY_PASSWORD_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.error
+      }
+
+    case FETCH_UPLOAD_AVATAR_REQUEST:
+      return {
+        ...state,
+        isFetching: true
+      }
+    case FETCH_UPLOAD_AVATAR_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        data: action.data
+      }
+    case FETCH_UPLOAD_AVATAR_FAILURE:
       return {
         ...state,
         isFetching: false,

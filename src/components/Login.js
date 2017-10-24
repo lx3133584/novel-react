@@ -25,7 +25,7 @@ class Login extends Component {
       if (!res.status) return
       Toast.info('登陆成功', 1)
       localStorage.setItem('TOKEN', 'Bearer ' + res.token)
-      this.props.history.push('/My')
+      this.props.history.push('/my')
     })
   }
     render() {
@@ -45,7 +45,7 @@ class Login extends Component {
             <Button type="primary" loading onClick={this.onSubmit}>登陆</Button>
           </WingBlank>
           </div>
-          
+
         );
     }
 }

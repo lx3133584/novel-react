@@ -17,17 +17,15 @@ class Bookshelf extends Component {
     }
     componentWillReceiveProps(nextProps) {
         if (nextProps.data !== this.props.data) {
-            this.props.data.length || (this.pageIndex = 0);
+            nextProps.data.length || (this.pageIndex = 0);
             this.setState({
-                dataSource: this.state.dataSource.cloneWithRows([...nextProps.data]),
+                dataSource: this.state.dataSource.cloneWithRows(nextProps.data),
             });
         }
     }
 
     onEndReached = (event) => {
-        if (this.props.isLoading || !this.hasMore) {
-            return;
-        }
+        if (this.props.isLoading || !this.hasMore) return;
         this.props.getData(++this.pageIndex, this.props.keyword).then(res => {
           if (!res.status) return
           if (!res.data.length) this.hasMore = false

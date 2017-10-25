@@ -10,6 +10,11 @@ import {
   Button
 } from 'antd-mobile';
 import './Content.less';
+// import skin from '../assets/images/skin-default.jpg';
+import skinT from '../assets/images/skin-default-t.jpg';
+import skinB from '../assets/images/skin-default-b.jpg';
+import skinM from '../assets/images/skin-default-m.jpg';
+// import skinS from '../assets/images/skin-default-s.png';
 const SliderWithTooltip = createTooltip(Slider);
 const fixedStyle = {
   position: 'fixed',
@@ -72,7 +77,7 @@ export default class ContentTabBar extends Component {
         background: '#FFF',
         color: '#000'
       }, {
-        background: '#D2BF9E',
+        background: `url(${skinT}) no-repeat center top,url(${skinB}) no-repeat center bottom,url(${skinM}) repeat-y center 1.586666rem`,
         color: '#000'
       }, {
         background: '#3A3531',
@@ -125,7 +130,7 @@ export default class ContentTabBar extends Component {
         : {}
       return <span onClick={() => this.props.changeTheme(theme)} style={{
         ...colorItemStyle,
-        backgroundColor: theme.background,
+        background: theme.background,
         ...activeStyle
       }}></span>
     }

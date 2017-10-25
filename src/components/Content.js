@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { WingBlank, ActivityIndicator, Pagination } from 'antd-mobile';
+
 export default class Content extends Component {
     componentDidMount() {
         let {num} = this.props.match.params
@@ -15,9 +16,9 @@ export default class Content extends Component {
     render() {
       const {background, color, lineHeight, loading, fontSize, data, total, showPopup} = this.props
         return (
-            <div style={{ padding: '0.5em 0', backgroundColor: background, color }}>
+            <div style={{ background, color }} className="content-warp">
                 {loading && <ActivityIndicator size="large" toast text="正在加载..." />}
-                <h2 style={{ fontSize: fontSize * 1.6 + 'px', margin: '0', padding: '0.5em 0', textAlign: 'center' }}>{data.title}</h2>
+                <h2 style={{ fontSize: fontSize * 1.6 + 'px' }} className="content-title">{data.title}</h2>
                 <WingBlank>
                     <p onClick={showPopup} style={{minHeight: '80vh', fontSize: fontSize + 'px', lineHeight: lineHeight, }} dangerouslySetInnerHTML={{ __html: data.content }}></p>
                     <Pagination total={total}

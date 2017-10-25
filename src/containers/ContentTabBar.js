@@ -10,6 +10,8 @@ const mapStateToProps = (state, ownProps) => ({
     color: state.config.color,
     background: state.config.background,
     token: state.token.token,
+    list: state.list.list,
+    data: state.content.data,
 })
 
 const mapDispatchToProps = dispatch => ({

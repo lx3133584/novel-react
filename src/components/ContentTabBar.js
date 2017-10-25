@@ -52,6 +52,10 @@ export default class ContentTabBar extends Component {
         text: '书籍详情',
         handler: this.detail.bind(this)
       }, {
+        icon: icon('process'),
+        text: '阅读进度',
+        handler: () => this.setState({step: 'process'})
+      }, {
         icon: icon('config'),
         text: '设置',
         handler: () => this.setState({step: 'config'})
@@ -93,9 +97,10 @@ export default class ContentTabBar extends Component {
     this.state = {
       step: 'index'
     };
+    this.goNext = this.goNext.bind(this)
   }
   add() {
-    let {id} = this.props.match.params
+    const {id} = this.props.match.params
     this.props.add(id).then(res => {
       if (!res.status)
         return
@@ -103,12 +108,16 @@ export default class ContentTabBar extends Component {
     })
   }
   list() {
-    let {id} = this.props.match.params
+    const {id} = this.props.match.params
     this.props.history.push(`/list/${id}`)
   }
   detail() {
-    let {id} = this.props.match.params
+    const {id} = this.props.match.params
     this.props.history.push(`/detail/${id}`)
+  }
+  goNext(num) {
+      const {id} = this.props.match.params
+      this.props.history.replace( `/content/${id}/${num}`)
   }
   render() {
     const ConfigBox = ({children}) => {
@@ -134,6 +143,9 @@ export default class ContentTabBar extends Component {
         ...activeStyle
       }}></span>
     }
+    const {list} = this.props
+    const {num} = this.props.match.params
+    const cur = +num
     return (
       <div>
         <div className="top" style={{
@@ -146,9 +158,32 @@ export default class ContentTabBar extends Component {
           background: '#fff',
           boxShadow: ' #4b4b4b 0 0 0.2rem'
         }}>
-          {this.state.step === 'index' && <Grid data={this.indexMap} columnNum={4} onClick={item => item.handler()}/>}
+          {this.state.step === 'index' && <Grid data={this.indexMap} columnNum={3} onClick={item => item.handler()}/>}
           {this.state.step === 'config' && <WingBlank>
             <Grid data={this.configMap} columnNum={3} onClick={item => item.handler()}/>
+            <Button onClick={() => this.setState({step: 'index'})}>返回</Button>
+            <WhiteSpace size="sm"/>
+          </WingBlank>}
+          {this.state.step === 'process' && <WingBlank>
+            <WhiteSpace size="sm"/>
+            <div style={{...configBoxStyle,
+              fontSize: '0.3rem'
+            }}>
+              <span onClick={() => this.goNext(cur - 1)}>上一章</span>
+              <dl style={{
+                textAlign: 'center'
+              }}>
+                <dd>{list[cur].title}</dd>
+                <dt>{(cur / list.length * 100).toFixed(2)}%</dt>
+              </dl>
+              <span onClick={() => this.goNext(cur + 1)}>下一章</span>
+            </div>
+            <WhiteSpace size="lg"/>
+            <SliderWithTooltip defaultValue={cur + 1}
+              style={{height: '2em'}}
+              min={1} max={list.length} step={1}
+              onAfterChange={value => this.goNext(value - 1)}/>
+            <WhiteSpace size="sm"/>
             <Button onClick={() => this.setState({step: 'index'})}>返回</Button>
             <WhiteSpace size="sm"/>
           </WingBlank>}

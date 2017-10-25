@@ -3,11 +3,18 @@ import { WingBlank, ActivityIndicator, Pagination } from 'antd-mobile';
 
 export default class Content extends Component {
     componentDidMount() {
-        let {num} = this.props.match.params
+        let {num, id} = this.props.match.params
         this.goNext(+num)
+        this.props.getList(id)
+    }
+    componentWillReceiveProps(nextProps) {
+      const {num} = nextProps.match.params
+      if (num !== this.props.match.params.num) {
+        this.goNext(+num)
+      }
     }
     goNext(next) {
-        let {id} = this.props.match.params
+        const {id} = this.props.match.params
         this.props.getContent(id, next).then(res => {
             if (!res.status) return
             if (this.props.token) this.props.updateProgress(id, next)

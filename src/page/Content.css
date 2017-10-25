@@ -1,36 +1,32 @@
 .top {
   top: 0;
+  transform: translate3d(0, 0, 0);
 }
 .bottom {
   bottom: 0;
+  transform: translate3d(0, 0, 0);
 }
 .slide-enter .top {
   transition: all 0.3s;
-  top: -0.9rem;
+  transform: translate3d(0, -100%, 0);
 }
 .slide-enter .bottom {
   transition: all 0.3s;
-  bottom: -25vw;
+  transform: translate3d(0, 100%, 0);
 }
 
-.slide-enter.slide-enter-active .top {
-  top: 0;
-}
+.slide-enter.slide-enter-active .top,
 .slide-enter.slide-enter-active .bottom {
-  bottom: 0;
+  transform: translate3d(0, 0, 0);
 }
-.slide-leave .top {
-  top: 0;
-  transition: all 0.3s;
-}
-.slide-leave .bottom {
-  bottom: 0;
+.slide-leave .top, .slide-leave .bottom {
+  transform: translate3d(0, 0, 0);
   transition: all 0.3s;
 }
 
 .slide-leave.slide-leave-active .top {
-  top: -0.9rem;
+  transform: translate3d(0, -100%, 0);
 }
 .slide-leave.slide-leave-active .bottom {
-  bottom: -25vw;
+  transform: translate3d(0, 100%, 0);
 }

@@ -6,7 +6,7 @@ import skinB from '../assets/images/skin-default-b.jpg';
 import skinM from '../assets/images/skin-default-m.jpg';
 // import skinS from '../assets/images/skin-default-s.png';
 export default (state = {
-    fontSize: 24,
+    fontSize: 5,
     lineHeight: 1.6,
     background: `url(${skinT}) no-repeat center top,url(${skinB}) no-repeat center bottom,url(${skinM}) repeat-y center 1.586666rem`,
     color: '#000',
@@ -15,7 +15,7 @@ export default (state = {
         case INIT_CONFIG:
             return {
                 ...state,
-                fontSize: +localStorage.getItem('FONT_SIZE') || 24,
+                fontSize: +localStorage.getItem('FONT_SIZE') || 5,
                 lineHeight: +localStorage.getItem('LINE_HEIFHT') || 1.6,
                 background: localStorage.getItem('BACKGROUND') || `url(${skinT}) no-repeat center top,url(${skinB}) no-repeat center bottom,url(${skinM}) repeat-y center 1.586666rem`,
                 color: localStorage.getItem('COLOR') || '#000',

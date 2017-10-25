@@ -159,7 +159,9 @@ export default class ContentTabBar extends Component {
             <div style={{
               width: '90%'
             }}>
-              <SliderWithTooltip value={this.props.fontSize} min={12} max={42} step={0.1} onChange={this.props.changeFontSize.bind(this)}/>
+              <SliderWithTooltip defaultValue={this.props.fontSize}
+                min={1} max={10} step={0.1}
+                onAfterChange={value => this.props.changeFontSize(value)}/>
             </div>
             <i className={`iconfont icon-font-size-up`} style={{
               fontSize: '0.4rem'
@@ -172,7 +174,9 @@ export default class ContentTabBar extends Component {
             <div style={{
               width: '90%'
             }}>
-              <SliderWithTooltip value={this.props.lineHeight} min={1} max={3} step={0.01} onChange={this.props.changeLineHeight.bind(this)}/>
+              <SliderWithTooltip defaultValue={this.props.lineHeight}
+                min={1} max={3} step={0.01}
+                onAfterChange={value => this.props.changeLineHeight(value)}/>
             </div>
             <span style={{
               fontSize: '0.5rem'

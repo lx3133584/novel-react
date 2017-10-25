@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import ContentTabBar from '../components/ContentTabBar';
-import { changeFontSize, changeLineHeight, changeTheme, fetchAddBook } from '../actions';
+import { changeFontSize, changeLineHeight, changeTheme, fetchAddBook, fetchContent, updateProgress } from '../actions';
 import { withRouter } from 'react-router-dom';
 
 const mapStateToProps = (state, ownProps) => ({
@@ -9,20 +9,27 @@ const mapStateToProps = (state, ownProps) => ({
     lineHeight: state.config.lineHeight,
     color: state.config.color,
     background: state.config.background,
+    token: state.token.token,
 })
 
 const mapDispatchToProps = dispatch => ({
   add (id) {
       return dispatch(fetchAddBook(id))
   },
-  changeFontSize: (value) => {
+  changeFontSize (value) {
       dispatch(changeFontSize(value))
   },
-  changeLineHeight: (value) => {
+  changeLineHeight (value) {
       dispatch(changeLineHeight(value))
   },
-  changeTheme: ({background, color}) => {
+  changeTheme ({background, color}) {
       dispatch(changeTheme({background, color}))
+  },
+  getContent (id, num) {
+      return dispatch(fetchContent(id, num))
+  },
+  updateProgress (id, num) {
+      dispatch(updateProgress(id, num))
   },
 })
 

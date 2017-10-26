@@ -20,6 +20,17 @@ const fixedStyle = {
   position: 'fixed',
   width: '100%'
 }
+const ellipsisListStyle = {
+  listStyle: 'none',
+  backgroundColor: '#108ee9',
+  color: '#fff',
+  margin: 0,
+  float: 'right',
+  padding: '0 0.2rem',
+}
+const ellipsisItemStyle = {
+  margin: '0.25rem 0',
+}
 const configBoxStyle = {
   display: 'flex',
   justifyContent: 'space-around',
@@ -35,22 +46,30 @@ const colorItemStyle = {
 export default class ContentTabBar extends Component {
   constructor(props) {
     super(props)
-    const icon = (iconfont) => <i className={`iconfont icon-${iconfont}`} style={{
-      fontSize: '0.6rem'
-    }}></i>
-    this.indexMap = [
+    const icon = (iconfont, fontSize, handler) => <i className={`iconfont icon-${iconfont}`} style={{
+      fontSize: (fontSize || 0.6) + 'rem'
+    }} onClick={handler}></i>
+    this.icon = icon;
+    this.ellipsisMap = [
       {
-        icon: icon('addbookshelf'),
+        icon: icon('addbookshelf', 0.4),
         text: '加入书架',
         handler: this.add.bind(this)
       }, {
+        icon: icon('detail', 0.4),
+        text: '书籍详情',
+        handler: this.detail.bind(this)
+      }, {
+        icon: icon('bookshelf', 0.4),
+        text: '返回书架',
+        handler: () => props.history.push('/')
+      },
+    ]
+    this.indexMap = [
+      {
         icon: icon('list'),
         text: '查看目录',
         handler: this.list.bind(this)
-      }, {
-        icon: icon('detail'),
-        text: '书籍详情',
-        handler: this.detail.bind(this)
       }, {
         icon: icon('process'),
         text: '阅读进度',
@@ -95,7 +114,8 @@ export default class ContentTabBar extends Component {
       }
     ]
     this.state = {
-      step: 'index'
+      step: 'index',
+      ellipsis: false
     };
     this.goNext = this.goNext.bind(this)
   }
@@ -148,10 +168,15 @@ export default class ContentTabBar extends Component {
     const cur = +num
     return (
       <div>
-        <div className="top" style={{
-          ...fixedStyle
-        }}>
-          <Header title={this.props.title} onLeftClick={this.props.history.goBack}/>
+        <div className="top" style={fixedStyle}>
+          <Header title={this.props.title}
+            rightContent={this.icon('ellipsis', null, () => this.setState({ellipsis: !this.state.ellipsis}))}
+            onLeftClick={this.props.history.goBack}/>
+            {this.state.ellipsis && <ul style={ellipsisListStyle}>
+              {this.ellipsisMap.map(item => {
+                return <li style={ellipsisItemStyle} onClick={item.handler} key={item.text}>{item.icon} {item.text}</li>
+              })}
+            </ul>}
         </div>
         <div className="bottom" style={{
           ...fixedStyle,
@@ -188,9 +213,7 @@ export default class ContentTabBar extends Component {
             <WhiteSpace size="sm"/>
           </WingBlank>}
           {this.state.step === 'fontSize' && <ConfigBox>
-            <i className={`iconfont icon-font-size-down`} style={{
-              fontSize: '0.4rem'
-            }} onClick={() => this.props.changeFontSize(this.props.fontSize - 1)}></i>
+            {this.icon('font-size-down', 0.4, () => this.props.changeFontSize(this.props.fontSize - 1))}
             <div style={{
               width: '90%'
             }}>
@@ -198,9 +221,7 @@ export default class ContentTabBar extends Component {
                 min={1} max={10} step={0.1}
                 onAfterChange={value => this.props.changeFontSize(value)}/>
             </div>
-            <i className={`iconfont icon-font-size-up`} style={{
-              fontSize: '0.4rem'
-            }} onClick={() => this.props.changeFontSize(this.props.fontSize + 1)}></i>
+            {this.icon('font-size-up', 0.4, () => this.props.changeFontSize(this.props.fontSize + 1))}
           </ConfigBox>}
           {this.state.step === 'lineHeight' && <ConfigBox>
             <span style={{

@@ -12,7 +12,7 @@ export default function Header({onLeftClick, rightContent, title, fixed}) {
         <div style={{height: '0.9rem'}}>
             <NavBar
             mode="dark"
-            style={headerStyle}
+            style={{...headerStyle}}
             iconName={null}
             onLeftClick={onLeftClick}
             leftContent={

@@ -49,9 +49,13 @@ export default class extends Component {
         return () => {
             const {id} = this.props.match.params
             const {showList, showTabBar} = this.props
-            this.props.history.push(`/content/${id}/${num}`)
-            if (showList) showList()
-            if (showTabBar) showTabBar()
+            if (showList) {
+              showList()
+              showTabBar()
+              this.props.history.replace(`/content/${id}/${num}`)
+            } else {
+              this.props.history.push(`/content/${id}/${num}`)
+            }
         }
     }
     flipList() {

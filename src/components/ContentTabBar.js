@@ -8,7 +8,8 @@ import {
   createTooltip,
   WhiteSpace,
   WingBlank,
-  Button
+  Button,
+  Popover
 } from 'antd-mobile';
 import './Content.less';
 // import skin from '../assets/images/skin-default.jpg';
@@ -17,20 +18,10 @@ import skinB from '../assets/images/skin-default-b.jpg';
 import skinM from '../assets/images/skin-default-m.jpg';
 // import skinS from '../assets/images/skin-default-s.png';
 const SliderWithTooltip = createTooltip(Slider);
+const Item = Popover.Item;
 const fixedStyle = {
   position: 'fixed',
   width: '100%'
-}
-const ellipsisListStyle = {
-  listStyle: 'none',
-  backgroundColor: '#108ee9',
-  color: '#fff',
-  margin: 0,
-  float: 'right',
-  padding: '0 0.2rem',
-}
-const ellipsisItemStyle = {
-  margin: '0.25rem 0',
 }
 const configBoxStyle = {
   display: 'flex',
@@ -66,6 +57,7 @@ class Top extends Component {
     this.state = {
       ellipsis: false
     };
+    this.ellipsis = this.ellipsis.bind(this)
   }
   add() {
     const {id} = this.props.match.params;
@@ -82,16 +74,25 @@ class Top extends Component {
   ellipsis() {
     this.setState({ellipsis: !this.state.ellipsis})
   }
+  onSelect({props}) {
+    props.onClick()
+  }
   render() {
     return <div className="top" style={fixedStyle}>
       <Header title={this.props.title}
-        rightContent={<Icon iconfont="ellipsis" handler={this.ellipsis.bind(this)} />}
+        rightContent={
+          <Popover
+            visible={this.state.ellipsis}
+            onSelect={this.onSelect}
+            onVisibleChange={this.ellipsis}
+            overlay={this.ellipsisMap.map(item => <Item
+              icon={item.icon}
+              onClick={item.handler}
+              key={item.text}>
+              {item.text}</Item>)}>
+          <Icon iconfont="ellipsis" handler={this.ellipsis} />
+        </Popover>}
         onLeftClick={this.props.history.goBack}/>
-        {this.state.ellipsis && <ul style={ellipsisListStyle}>
-          {this.ellipsisMap.map(item => {
-            return <li style={ellipsisItemStyle} onClick={item.handler} key={item.text}>{item.icon} {item.text}</li>
-          })}
-        </ul>}
     </div>
   }
 }

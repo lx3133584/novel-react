@@ -38,7 +38,7 @@ export default class ContentPage extends Component {
                     {isListShow && <div className='list-box'>
                       <List showTabBar={this.showTabBar} showList={this.showList}/>
                     </div>}
-                    {isListShow && <div className='cover' onClick={this.showList}></div>}
+                    {isListShow && <div className='mask' onClick={this.showList}></div>}
                 </ReactCSSTransitionGroup>
                 <Content showTabBar={this.showTabBar} showList={this.showList}/>
             </div>

@@ -46,14 +46,15 @@ export default class extends Component {
       if (nextProps.list !== this.props.list) {
         this.setState({reverseList: nextProps.list})
       }
+      nextProps.isListShow && this.scrollToItem()
     }
     componentDidMount() {
         let {id} = this.props.match.params
         this.props.id === id || this.props.getList(id)
-        this.scrollToItem()
     }
     shouldComponentUpdate(nextProps, nextState) {
-      if (nextProps.list === this.props.list && nextState.reverseList === this.props.reverseList) return false
+      if (nextProps.list === this.props.list
+        && nextState.reverseList === this.props.reverseList) return false
       return true
     }
     goContent(num) {
@@ -73,13 +74,18 @@ export default class extends Component {
       const {reverseList} = this.state;
       let newList = [...reverseList];
       newList.reverse();
-      this.setState({reverseList: newList})
+      this.setState({reverseList: newList});
     }
     scrollToItem() {
-      const {num} = this.props.match.params
-      if(!num) return
-      const top = +num > 4 ? this.listDom.children[1].children[1].children[+num - 2].getBoundingClientRect().top : 0
-      this.listDom.parentElement.scrollTo(0, top)
+      const {num} = this.props.match.params;
+      if(!num) return;
+      const top = +num > 4 ? this.listDom &&
+      this.listDom.children &&
+      this.listDom.children[1].children &&
+      this.listDom.children[1].children[1].children &&
+      this.listDom.children[1].children[1].children[+num - 2] &&
+      this.listDom.children[1].children[1].children[+num - 2].getBoundingClientRect().top : 0;
+      this.listDom.parentElement.scrollTo(0, top);
     }
     render() {
         const {reverseList} = this.state

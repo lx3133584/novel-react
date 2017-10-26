@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Content from '../containers/Content.js';
 import List from '../containers/List.js';
+import { Drawer } from 'antd-mobile';
 import ContentTabBar from '../containers/ContentTabBar.js';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import './Content.css';
@@ -28,20 +29,22 @@ export default class ContentPage extends Component {
     render() {
         const {isTabBarShow, isListShow} = this.state
         return (
-            <div>
-                <ReactCSSTransitionGroup
-                    transitionName="slide"
-                    component="div"
-                    transitionEnterTimeout={300}
-                    transitionLeaveTimeout={300}>
-                    {isTabBarShow && <ContentTabBar showTabBar={this.showTabBar} showList={this.showList}/>}
-                    {isListShow && <div className='list-box'>
-                      <List showTabBar={this.showTabBar} showList={this.showList}/>
-                    </div>}
-                    {isListShow && <div className='mask' onClick={this.showList}></div>}
-                </ReactCSSTransitionGroup>
-                <Content showTabBar={this.showTabBar} showList={this.showList}/>
-            </div>
+            <Drawer
+              enableDragHandle
+              position="right"
+              sidebarStyle={{width: '80%'}}
+              sidebar={<List showTabBar={this.showTabBar} showList={this.showList} isListShow={isListShow}/>}
+              open={isListShow}
+              onOpenChange={this.showList}>
+              <ReactCSSTransitionGroup
+                  transitionName="slide"
+                  component="div"
+                  transitionEnterTimeout={300}
+                  transitionLeaveTimeout={300}>
+                  {isTabBarShow && <ContentTabBar showTabBar={this.showTabBar} showList={this.showList}/>}
+              </ReactCSSTransitionGroup>
+              <Content showTabBar={this.showTabBar} showList={this.showList}/>
+            </Drawer>
         );
     }
 }

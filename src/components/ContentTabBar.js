@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import Header from '../components/Header.js';
+import Header from './Header.js';
+import Icon from './Icon.js';
 import {Toast} from 'antd-mobile';
 import {
   Grid,
@@ -43,54 +44,86 @@ const colorItemStyle = {
   borderRadius: '50%',
   border: '3px solid #EEE'
 }
-export default class ContentTabBar extends Component {
+
+class Top extends Component {
   constructor(props) {
     super(props)
-    const icon = (iconfont, fontSize, handler) => <i className={`iconfont icon-${iconfont}`} style={{
-      fontSize: (fontSize || 0.6) + 'rem'
-    }} onClick={handler}></i>
-    this.icon = icon;
     this.ellipsisMap = [
       {
-        icon: icon('addbookshelf', 0.4),
+        icon: <Icon iconfont="addbookshelf" fontSize={0.4} />,
         text: '加入书架',
         handler: this.add.bind(this)
       }, {
-        icon: icon('detail', 0.4),
+        icon: <Icon iconfont="detail" fontSize={0.4} />,
         text: '书籍详情',
         handler: this.detail.bind(this)
       }, {
-        icon: icon('bookshelf', 0.4),
+        icon: <Icon iconfont="bookshelf" fontSize={0.4} />,
         text: '返回书架',
         handler: () => props.history.push('/')
       },
-    ]
+    ];
+    this.state = {
+      ellipsis: false
+    };
+  }
+  add() {
+    const {id} = this.props.match.params;
+    this.ellipsis()
+    this.props.add(id).then(res => {
+      if (!res.status) return;
+      Toast.info('加入书架成功', 1);
+    })
+  }
+  detail() {
+    const {id} = this.props.match.params
+    this.props.history.push(`/detail/${id}`)
+  }
+  ellipsis() {
+    this.setState({ellipsis: !this.state.ellipsis})
+  }
+  render() {
+    return <div className="top" style={fixedStyle}>
+      <Header title={this.props.title}
+        rightContent={<Icon iconfont="ellipsis" handler={this.ellipsis.bind(this)} />}
+        onLeftClick={this.props.history.goBack}/>
+        {this.state.ellipsis && <ul style={ellipsisListStyle}>
+          {this.ellipsisMap.map(item => {
+            return <li style={ellipsisItemStyle} onClick={item.handler} key={item.text}>{item.icon} {item.text}</li>
+          })}
+        </ul>}
+    </div>
+  }
+}
+export default class ContentTabBar extends Component {
+  constructor(props) {
+    super(props)
     this.indexMap = [
       {
-        icon: icon('list'),
+        icon: <Icon iconfont="list" />,
         text: '查看目录',
         handler: this.list.bind(this)
       }, {
-        icon: icon('process'),
+        icon: <Icon iconfont="process" />,
         text: '阅读进度',
         handler: () => this.setState({step: 'process'})
       }, {
-        icon: icon('config'),
+        icon: <Icon iconfont="config" />,
         text: '设置',
         handler: () => this.setState({step: 'config'})
       }
     ];
     this.configMap = [
       {
-        icon: icon('font-size'),
+        icon: <Icon iconfont="font-size" />,
         text: '字体大小',
         handler: () => this.setState({step: 'fontSize'})
       }, {
-        icon: icon('line-height'),
+        icon: <Icon iconfont="line-height" />,
         text: '行高',
         handler: () => this.setState({step: 'lineHeight'})
       }, {
-        icon: icon('color'),
+        icon: <Icon iconfont="color" />,
         text: '主题',
         handler: () => this.setState({step: 'theme'})
       }
@@ -112,35 +145,20 @@ export default class ContentTabBar extends Component {
         background: '#001C28',
         color: '#666D79'
       }
-    ]
+    ];
     this.state = {
-      step: 'index',
-      ellipsis: false
+      step: 'index'
     };
     this.goNext = this.goNext.bind(this)
   }
-  add() {
-    const {id} = this.props.match.params;
-    this.ellipsis()
-    this.props.add(id).then(res => {
-      if (!res.status) return;
-      Toast.info('加入书架成功', 1);
-    })
-  }
+
   list() {
     const {showList} = this.props;
     showList(true)
   }
-  detail() {
-    const {id} = this.props.match.params
-    this.props.history.push(`/detail/${id}`)
-  }
   goNext(num) {
       const {id} = this.props.match.params
       this.props.history.replace( `/content/${id}/${num}`)
-  }
-  ellipsis() {
-    this.setState({ellipsis: !this.state.ellipsis})
   }
   render() {
     const ConfigBox = ({children}) => {
@@ -171,16 +189,7 @@ export default class ContentTabBar extends Component {
     const cur = +num
     return (
       <div>
-        <div className="top" style={fixedStyle}>
-          <Header title={this.props.title}
-            rightContent={this.icon('ellipsis', null, this.ellipsis.bind(this))}
-            onLeftClick={this.props.history.goBack}/>
-            {this.state.ellipsis && <ul style={ellipsisListStyle}>
-              {this.ellipsisMap.map(item => {
-                return <li style={ellipsisItemStyle} onClick={item.handler} key={item.text}>{item.icon} {item.text}</li>
-              })}
-            </ul>}
-        </div>
+        <Top {...this.props}/>
         <div className="bottom" style={{
           ...fixedStyle,
           background: '#fff',
@@ -216,7 +225,7 @@ export default class ContentTabBar extends Component {
             <WhiteSpace size="sm"/>
           </WingBlank>}
           {this.state.step === 'fontSize' && <ConfigBox>
-            {this.icon('font-size-down', 0.4, () => this.props.changeFontSize(this.props.fontSize - 1))}
+            <Icon iconfont="font-size-down" fontSize={0.4} handler={() => this.props.changeFontSize(this.props.fontSize - 1)}/>
             <div style={{
               width: '90%'
             }}>
@@ -224,7 +233,7 @@ export default class ContentTabBar extends Component {
                 min={1} max={10} step={0.1}
                 onAfterChange={value => this.props.changeFontSize(value)}/>
             </div>
-            {this.icon('font-size-up', 0.4, () => this.props.changeFontSize(this.props.fontSize + 1))}
+            <Icon iconfont="font-size-up" fontSize={0.4} handler={() => this.props.changeFontSize(this.props.fontSize + 1)}/>
           </ConfigBox>}
           {this.state.step === 'lineHeight' && <ConfigBox>
             <span style={{

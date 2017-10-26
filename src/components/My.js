@@ -3,6 +3,7 @@ import LoginBtn from './LoginBtn.js';
 import { Toast, Grid, Modal } from 'antd-mobile';
 import defaultAvatar from '../assets/images/avatar.jpg';
 import selectImage from '../utils/selectImage';
+import Icon from './Icon.js';
 const avatarBoxStyle = {
   display: 'flex',
   justifyContent: 'center',
@@ -22,20 +23,19 @@ const nameStyle = {
 export default class My extends Component {
   constructor() {
     super()
-    const icon = (iconfont) => <i className={`iconfont icon-${iconfont}`} style={{ fontSize: '0.6rem' }}></i>
     this.menuMap = [
       {
-          icon: icon('modify'),
+          icon: <Icon iconfont="modify" fontSize={0.6} />,
           text: '修改昵称',
           handler: () => this.props.history.push(`/my/edit_name/${this.props.info.name}`)
       },
       {
-          icon: icon('password'),
+          icon: <Icon iconfont="password" fontSize={0.6} />,
           text: '修改密码',
           handler: () => this.props.history.push(`/my/modify_password`)
       },
       {
-          icon: icon('logout'),
+          icon: <Icon iconfont="logout" fontSize={0.6} />,
           text: '退出登录',
           handler: () => this.logout()
       },

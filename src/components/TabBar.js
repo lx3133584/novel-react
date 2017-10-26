@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { TabBar } from 'antd-mobile';
+import Icon from './Icon.js';
 class Bar extends Component {
     constructor(props) {
         super(props);
@@ -21,13 +22,12 @@ class Bar extends Component {
         }
     }
     renderItem({path, title, icon}) {
-        let Icon = () => <i className={"iconfont icon-" + icon} style={{fontSize:'0.44rem'}} />
         return (
             <TabBar.Item
             title={title}
             key={icon}
-            icon={<Icon />}
-            selectedIcon={<Icon />}
+            icon={<Icon iconfont={icon} fontSize={0.44}/>}
+            selectedIcon={<Icon iconfont={icon} fontSize={0.44}/>}
             selected={this.state.selectedTab === path}
             onPress={() => {
                 this.props.history.push(path)

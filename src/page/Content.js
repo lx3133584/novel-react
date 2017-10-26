@@ -27,9 +27,6 @@ export default class ContentPage extends Component {
     }
     render() {
         const {isTabBarShow, isListShow} = this.state
-        const ListCache = <div className='list-box'>
-          <List showTabBar={this.showTabBar} showList={this.showList}/>
-        </div>
         return (
             <div>
                 <ReactCSSTransitionGroup
@@ -38,7 +35,9 @@ export default class ContentPage extends Component {
                     transitionEnterTimeout={300}
                     transitionLeaveTimeout={300}>
                     {isTabBarShow && <ContentTabBar showTabBar={this.showTabBar} showList={this.showList}/>}
-                    {isListShow && ListCache}
+                    {isListShow && <div className='list-box'>
+                      <List showTabBar={this.showTabBar} showList={this.showList}/>
+                    </div>}
                     {isListShow && <div className='cover' onClick={this.showList}></div>}
                 </ReactCSSTransitionGroup>
                 <Content showTabBar={this.showTabBar} showList={this.showList}/>

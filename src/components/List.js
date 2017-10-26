@@ -1,5 +1,16 @@
 import React, { Component } from 'react';
 import { List, ActivityIndicator, Button } from 'antd-mobile';
+const itemStyle = {
+  height: '0.88rem',
+  lineHeight: '0.88rem',
+  padding: '0.14rem 0',
+  margin: '0 0.3rem',
+  fontSize: '0.34rem',
+  color: '#000',
+  borderBottom: '1px solid #ddd',
+  textOverflow: 'ellipsis',
+  overflow: 'hidden',
+}
 class Tip extends Component {
   constructor() {
     super()
@@ -66,22 +77,25 @@ export default class extends Component {
     }
     scrollToItem() {
       const {num} = this.props.match.params
-      this.listDom.parentElement.scrollTo(0, this.listDom.children[1].children[1].children[+num - 2].getBoundingClientRect().top)
+      if(!num) return
+      const top = +num > 4 ? this.listDom.children[1].children[1].children[+num - 2].getBoundingClientRect().top : 0
+      this.listDom.parentElement.scrollTo(0, top)
     }
     render() {
         const {reverseList} = this.state
         const {num} = this.props.match.params
+        const Item = (item) => <div
+          style={{...itemStyle, color: +num === item.number ? '#108ee9' : '#000'}}
+          key={item._id}
+          onClick={this.goContent(item.number)}>
+            {item.number + 1}. {item.title}
+          </div>
         return (
             <div style={{backgroundColor: '#fff'}} ref={dom => this.listDom = dom}>
                 {this.props.loading && <ActivityIndicator size="large" toast text="正在加载..." />}
                 <Tip len={reverseList.length} flipList={this.flipList}></Tip>
                 <List renderHeader={() => this.props.title}>
-                    {reverseList.map(item => <List.Item arrow="horizontal"
-                      key={item._id}
-                      onClick={this.goContent(item.number)}>
-                      <span style={{color: +num === item.number ? '#108ee9' : '#000'}}>
-                        {item.number + 1}. {item.title}</span>
-                      </List.Item>)}
+                    {reverseList.map(Item)}
                 </List>
             </div>
         );

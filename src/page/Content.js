@@ -30,7 +30,6 @@ export default class ContentPage extends Component {
         const {isTabBarShow, isListShow} = this.state
         return (
             <Drawer
-              enableDragHandle
               position="right"
               sidebarStyle={{width: '80%'}}
               sidebar={<List showTabBar={this.showTabBar} showList={this.showList} isListShow={isListShow}/>}

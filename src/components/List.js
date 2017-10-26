@@ -84,7 +84,7 @@ export default class extends Component {
       this.listDom.children[1].children &&
       this.listDom.children[1].children[1].children &&
       this.listDom.children[1].children[1].children[+num - 2] &&
-      this.listDom.children[1].children[1].children[+num - 2].getBoundingClientRect().top : 0;
+      this.listDom.children[1].children[1].children[+num - 2].offsetTop : 0;
       this.listDom.parentElement.scrollTo(0, top);
     }
     render() {

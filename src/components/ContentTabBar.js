@@ -120,16 +120,16 @@ export default class ContentTabBar extends Component {
     this.goNext = this.goNext.bind(this)
   }
   add() {
-    const {id} = this.props.match.params
+    const {id} = this.props.match.params;
+    this.ellipsis()
     this.props.add(id).then(res => {
-      if (!res.status)
-        return
+      if (!res.status) return;
       Toast.info('加入书架成功', 1);
     })
   }
   list() {
-    const {id} = this.props.match.params
-    this.props.history.push(`/list/${id}`)
+    const {showList} = this.props;
+    showList(true)
   }
   detail() {
     const {id} = this.props.match.params
@@ -138,6 +138,9 @@ export default class ContentTabBar extends Component {
   goNext(num) {
       const {id} = this.props.match.params
       this.props.history.replace( `/content/${id}/${num}`)
+  }
+  ellipsis() {
+    this.setState({ellipsis: !this.state.ellipsis})
   }
   render() {
     const ConfigBox = ({children}) => {
@@ -170,7 +173,7 @@ export default class ContentTabBar extends Component {
       <div>
         <div className="top" style={fixedStyle}>
           <Header title={this.props.title}
-            rightContent={this.icon('ellipsis', null, () => this.setState({ellipsis: !this.state.ellipsis}))}
+            rightContent={this.icon('ellipsis', null, this.ellipsis.bind(this))}
             onLeftClick={this.props.history.goBack}/>
             {this.state.ellipsis && <ul style={ellipsisListStyle}>
               {this.ellipsisMap.map(item => {

@@ -21,13 +21,13 @@ export default class Content extends Component {
         })
     }
     render() {
-      const {background, color, lineHeight, loading, fontSize, data, total, showPopup} = this.props
+      const {background, color, lineHeight, loading, fontSize, data, total, showTabBar} = this.props
         return (
             <div style={{ background, color }} className="content-warp">
                 {loading && <ActivityIndicator size="large" toast text="正在加载..." />}
                 <h2 style={{ fontSize: fontSize * 0.1 + 'rem' }} className="content-title">{data.title}</h2>
                 <WingBlank>
-                    <p onClick={showPopup} style={{minHeight: '80vh', fontSize: fontSize * 0.08 + 'rem', lineHeight: lineHeight, }} dangerouslySetInnerHTML={{ __html: data.content }}></p>
+                    <p onClick={showTabBar} style={{minHeight: '80vh', fontSize: fontSize * 0.08 + 'rem', lineHeight: lineHeight, }} dangerouslySetInnerHTML={{ __html: data.content }}></p>
                     <Pagination total={total}
                         className="custom-pagination-with-icon"
                         current={data.number}

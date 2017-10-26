@@ -39,6 +39,7 @@ export default class extends Component {
     componentDidMount() {
         let {id} = this.props.match.params
         this.props.id === id || this.props.getList(id)
+        this.scrollToItem()
     }
     shouldComponentUpdate(nextProps, nextState) {
       if (nextProps.list === this.props.list && nextState.reverseList === this.props.reverseList) return false
@@ -47,7 +48,10 @@ export default class extends Component {
     goContent(num) {
         return () => {
             const {id} = this.props.match.params
+            const {showList, showTabBar} = this.props
             this.props.history.push(`/content/${id}/${num}`)
+            if (showList) showList()
+            if (showTabBar) showTabBar()
         }
     }
     flipList() {
@@ -56,14 +60,24 @@ export default class extends Component {
       newList.reverse();
       this.setState({reverseList: newList})
     }
+    scrollToItem() {
+      const {num} = this.props.match.params
+      this.listDom.parentElement.scrollTo(0, this.listDom.children[1].children[1].children[+num - 2].getBoundingClientRect().top)
+    }
     render() {
         const {reverseList} = this.state
+        const {num} = this.props.match.params
         return (
-            <div>
+            <div style={{backgroundColor: '#fff'}} ref={dom => this.listDom = dom}>
                 {this.props.loading && <ActivityIndicator size="large" toast text="正在加载..." />}
                 <Tip len={reverseList.length} flipList={this.flipList}></Tip>
                 <List renderHeader={() => this.props.title}>
-                    {reverseList.map(item => <List.Item arrow="horizontal" key={item._id} onClick={this.goContent(item.number)}>{item.title}</List.Item>)}
+                    {reverseList.map(item => <List.Item arrow="horizontal"
+                      key={item._id}
+                      onClick={this.goContent(item.number)}>
+                      <span style={{color: +num === item.number ? '#108ee9' : '#000'}}>
+                        {item.number + 1}. {item.title}</span>
+                      </List.Item>)}
                 </List>
             </div>
         );

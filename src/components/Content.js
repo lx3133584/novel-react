@@ -33,8 +33,8 @@ export default class Content extends Component {
                         current={data.number}
                         onChange={this.goNext.bind(this)}
                         locale={{
-                            prevText: (<span className="arrow-align">上一页</span>),
-                            nextText: (<span className="arrow-align">下一页</span>),
+                            prevText: (<span className="arrow-align">上一章</span>),
+                            nextText: (<span className="arrow-align">下一章</span>),
                         }}
                     />
                 </WingBlank>

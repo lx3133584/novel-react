@@ -13,6 +13,7 @@ const mapStateToProps = (state, ownProps) => {
     background: state.config.background,
     color: state.config.color,
     token: state.token.token,
+    id: state.list.id,
   }
 }
 

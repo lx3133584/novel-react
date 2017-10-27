@@ -5,7 +5,7 @@ export default class Content extends Component {
     componentDidMount() {
         let {num, id} = this.props.match.params
         this.goNext(+num)
-        this.props.getList(id)
+        this.props.id === id || this.props.getList(id)
     }
     componentWillReceiveProps(nextProps) {
       const {num} = nextProps.match.params

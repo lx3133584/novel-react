@@ -108,8 +108,6 @@ export default class ListCompent extends Component {
       this.setState({reverseList: newList});
     }
     scrollToItem() {
-      const {num} = this.props.match.params;
-      if(!num) return;
       if (!this.listDom || !this.itemDom) return;
       const top = this.itemDom.offsetTop || 0;
       this.listDom.parentElement.scrollTo(0, top);

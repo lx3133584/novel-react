@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { fetchContent, updateProgress, fetchList } from '../actions';
+import { fetchContent, updateProgress } from '../actions';
 import Content from '../components/Content';
 import { withRouter } from 'react-router-dom';
 
@@ -12,7 +12,6 @@ const mapStateToProps = (state, ownProps) => {
     lineHeight: state.config.lineHeight,
     background: state.config.background,
     color: state.config.color,
-    token: state.token.token,
     id: state.list.id,
   }
 }
@@ -23,9 +22,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   },
   updateProgress (id, num) {
       dispatch(updateProgress(id, num))
-  },
-  getList (id) {
-      dispatch(fetchList(id))
   },
 })
 

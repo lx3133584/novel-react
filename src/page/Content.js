@@ -1,12 +1,13 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import Content from '../containers/Content.js';
 import List from '../containers/List.js';
 import { Drawer } from 'antd-mobile';
 import ContentTabBar from '../containers/ContentTabBar.js';
+import ContentHeader from '../containers/ContentHeader.js';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import './Content.css';
 
-export default class ContentPage extends Component {
+export default class ContentPage extends PureComponent {
     constructor(props) {
         super(props)
         this.state = {
@@ -40,7 +41,10 @@ export default class ContentPage extends Component {
                   component="div"
                   transitionEnterTimeout={300}
                   transitionLeaveTimeout={300}>
-                  {isTabBarShow && <ContentTabBar showTabBar={this.showTabBar} showList={this.showList}/>}
+                  {isTabBarShow && <div>
+                    <ContentTabBar showList={this.showList}/>
+                    <ContentHeader showList={this.showList}/>
+                  </div>}
               </ReactCSSTransitionGroup>
               <Content showTabBar={this.showTabBar} showList={this.showList}/>
             </Drawer>

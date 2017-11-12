@@ -3,9 +3,8 @@ import { WingBlank, ActivityIndicator, Pagination } from 'antd-mobile';
 
 export default class Content extends Component {
     componentDidMount() {
-        let {num, id} = this.props.match.params
+        let {num} = this.props.match.params
         this.goNext(+num)
-        this.props.id === id || this.props.getList(id)
     }
     componentWillReceiveProps(nextProps) {
       const {num} = nextProps.match.params

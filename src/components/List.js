@@ -34,7 +34,7 @@ class Tip extends Component {
   }
 
 }
-export default class extends Component {
+export default class ListCompent extends Component {
     constructor(props) {
       super(props)
       this.state = {
@@ -54,7 +54,7 @@ export default class extends Component {
     }
     shouldComponentUpdate(nextProps, nextState) {
       if (nextProps.list === this.props.list
-        && nextState.reverseList === this.props.reverseList) return false
+        && nextState.reverseList === this.state.reverseList) return false
       return true
     }
     goContent(num) {

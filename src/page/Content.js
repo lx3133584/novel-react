@@ -42,8 +42,8 @@ export default class ContentPage extends PureComponent {
                   transitionEnterTimeout={300}
                   transitionLeaveTimeout={300}>
                   {isTabBarShow && <div>
+                    <ContentHeader showTabBar={this.showTabBar}/>
                     <ContentTabBar showList={this.showList}/>
-                    <ContentHeader showList={this.showList}/>
                   </div>}
               </ReactCSSTransitionGroup>
               <Content showTabBar={this.showTabBar} showList={this.showList}/>

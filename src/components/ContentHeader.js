@@ -42,9 +42,10 @@ export default class ContentHeader extends PureComponent {
       if (!res.status) return;
       Toast.info('加入书架成功', 1);
     })
+    this.props.showTabBar(false)
   }
   detail() {
-    const {id} = this.props.match.params
+    const {id} = this.props.match.params;
     this.props.history.push(`/detail/${id}`)
   }
   ellipsis() {

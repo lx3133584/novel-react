@@ -34,6 +34,49 @@ class Tip extends Component {
   }
 
 }
+class ListItem extends Component {
+  constructor(props) {
+    super(props)
+    const {num} = this.props.match.params;
+    this.state = {
+      active: props.item.number === +num
+    }
+  }
+  goContent() {
+    const {showList, showTabBar} = this.props;
+    const {id} = this.props.match.params;
+    const {number} = this.props.item;
+    if (showList) {
+      showList(false)
+      showTabBar(false)
+      this.props.history.replace(`/content/${id}/${number}`)
+    } else {
+      this.props.history.push(`/content/${id}/${number}`)
+    }
+  }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.match.params.num !== this.props.match.params.num) {
+      this.setState({active: nextProps.item.number === +nextProps.match.params.num})
+    }
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    if (nextProps.item === this.props.item
+      && nextState.active === this.state.active) return false
+    return true
+  }
+  render() {
+    const {_id, number, title} = this.props.item
+    const {getActiveItem} = this.props
+    const {active} = this.state
+    return <div
+      ref={active && getActiveItem}
+      style={{...itemStyle, color: active ? '#108ee9' : '#000'}}
+      key={_id}
+      onClick={this.goContent.bind(this)}>
+        {number + 1}. {title}
+      </div>
+  }
+}
 export default class ListCompent extends Component {
     constructor(props) {
       super(props)
@@ -49,26 +92,14 @@ export default class ListCompent extends Component {
       nextProps.isListShow && this.scrollToItem()
     }
     componentDidMount() {
-        let {id} = this.props.match.params
+        const {id} = this.props.match.params
         this.props.id === id || this.props.getList(id)
     }
     shouldComponentUpdate(nextProps, nextState) {
       if (nextProps.list === this.props.list
-        && nextState.reverseList === this.state.reverseList) return false
+        && nextState.reverseList === this.state.reverseList
+        && nextProps.match.params.num === this.props.match.params.num) return false
       return true
-    }
-    goContent(num) {
-        return () => {
-            const {id} = this.props.match.params
-            const {showList, showTabBar} = this.props
-            if (showList) {
-              showList()
-              showTabBar()
-              this.props.history.replace(`/content/${id}/${num}`)
-            } else {
-              this.props.history.push(`/content/${id}/${num}`)
-            }
-        }
     }
     flipList() {
       const {reverseList} = this.state;
@@ -79,23 +110,17 @@ export default class ListCompent extends Component {
     scrollToItem() {
       const {num} = this.props.match.params;
       if(!num) return;
-      const top = +num > 4 ? this.listDom &&
-      this.listDom.children &&
-      this.listDom.children[1].children &&
-      this.listDom.children[1].children[1].children &&
-      this.listDom.children[1].children[1].children[+num - 2] &&
-      this.listDom.children[1].children[1].children[+num - 2].offsetTop : 0;
+      if (!this.listDom || !this.itemDom) return;
+      const top = this.itemDom.offsetTop || 0;
       this.listDom.parentElement.scrollTo(0, top);
     }
     render() {
         const {reverseList} = this.state
-        const {num} = this.props.match.params
-        const Item = (item) => <div
-          style={{...itemStyle, color: +num === item.number ? '#108ee9' : '#000'}}
-          key={item._id}
-          onClick={this.goContent(item.number)}>
-            {item.number + 1}. {item.title}
-          </div>
+        const Item = item => <ListItem
+          {...this.props}
+          key={item.number}
+          getActiveItem={dom => this.itemDom = dom}
+          item={item} />
         return (
             <div style={{backgroundColor: '#fff'}} ref={dom => this.listDom = dom}>
                 {this.props.loading && <ActivityIndicator size="large" toast text="正在加载..." />}
